@@ -11,7 +11,7 @@ include'connect/connect.php';
 <html lang="en">
 	<head>
 <base href="" />
-		<title>Signup-Ejobconnect</title>
+		<title>Forgot Password</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Sta. Rosa e-JobConnect aims to provide a centralized, accessible, and user-friendly web platform that bridges jobseekers and employers through efficient, transparent, and technology-driven recruitment and employment services. By streamlining job matching, promoting local opportunities, and enhancing communication between stakeholders, the platform empowers the workforce and supports inclusive economic growth within the City of Sta. Rosa." />
 		<meta name="keywords" content="job, seeker, hunting, looking for" />
@@ -48,103 +48,37 @@ include'connect/connect.php';
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="#">
+							<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="authentication/layouts/corporate/new-password.html" action="#">
 								<!--begin::Heading-->
-								<div class="text-center mb-11">
+								<div class="text-center mb-10">
 									<!--begin::Title-->
-									<h1 class="text-gray-900 fw-bolder mb-3">Sign up</h1>
+									<h1 class="text-gray-900 fw-bolder mb-3">Forgot Password ?</h1>
 									<!--end::Title-->
-								</div>
-								<!--begin::Heading-->
-								<!--begin::Separator-->
-								<div class="separator separator-content my-14">
-									<span class="w-125px text-gray-500 fw-semibold fs-7">Credentials</span>
-								</div>
-								<!--end::Separator-->
-								<?php
-									if(isset($_GET['error'])){
-										$error=$_GET['error'];
-										?>
-										<div class="alert alert-danger alert-dismissible">
-										  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-										  <strong>Error!</strong> <?php echo$error?>
-										</div>
-										<?php
-									}
-								?>
-								<!--begin::Input group=-->
-								<!--end::Separator-->
-								<!--begin::Input group=-->
-								<div class="fv-row mb-8">
-									<!--begin::Email-->
-									<select  placeholder="Email" name="user_type" autocomplete="off" class="form-control bg-transparent" >
-										<option></option>
-										<option>Employer</option>
-										<option>Applicant</option>
-									</select>
-									<!--end::Email-->
-								</div>
-								<!--begin::Input group=-->
-								<div class="fv-row mb-8">
-									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
-									<!--end::Email-->
-								</div>
-								<!--begin::Input group-->
-								<div class="fv-row mb-8" data-kt-password-meter="true">
-									<!--begin::Wrapper-->
-									<div class="mb-1">
-										<!--begin::Input wrapper-->
-										<div class="position-relative mb-3">
-											<input class="form-control bg-transparent" type="password" placeholder="Password" name="password" autocomplete="off" />
-											<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
-												<!-- <i class="ki-duotone ki-eye-slash fs-2"></i>
-												<i class="ki-duotone ki-eye fs-2 d-none"></i> --> 
-												<i class="bi bi-eye-slash fs-2"></i>
-												<i class="bi bi-eye fs-2 d-none"></i>
-											</span>
-										</div>
-										
-										<!--end::Input wrapper-->
-										<!--begin::Meter-->
-										<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-										</div>
-										<!--end::Meter-->
-									</div>
-									<!--end::Wrapper-->
-									<!--begin::Hint-->
-									<div class="text-muted">Use 8 or more characters with a mix of letters, numbers & symbols.</div>
-									<!--end::Hint-->
-								</div>
-								<!--end::Input group=-->
-								<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
 									<!--begin::Link-->
-									<a href="forgot-password.php" class="link-danger">Forgot Password ?</a>
+									<div class="text-gray-500 fw-semibold fs-6">Enter your email to reset your password.</div>
 									<!--end::Link-->
 								</div>
-								<!--begin::Submit button-->
-								<div class="d-grid mb-10">
-									<button type="submit" id="kt_sign_in_submit" class="btn btn-danger">
+								<!--begin::Heading-->
+								<!--begin::Input group=-->
+								<div class="fv-row mb-8 fv-plugins-icon-container">
+									<!--begin::Email-->
+									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent">
+									<!--end::Email-->
+								<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+								<!--begin::Actions-->
+								<div class="d-flex flex-wrap justify-content-center pb-lg-0">
+									<button type="button" id="kt_password_reset_submit" class="btn btn-danger me-4">
 										<!--begin::Indicator label-->
-										<span class="indicator-label">Create Account</span>
+										<span class="indicator-label">Submit</span>
 										<!--end::Indicator label-->
 										<!--begin::Indicator progress-->
 										<span class="indicator-progress">Please wait... 
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 										<!--end::Indicator progress-->
 									</button>
+									<a href="authentication/layouts/corporate/sign-in.html" class="btn btn-light">Cancel</a>
 								</div>
-								<!--end::Submit button-->
-								<!--begin::Sign up-->
-								<div class="text-gray-500 text-center fw-semibold fs-6">Already a Member ? 
-								<a href="login.php" class="link-danger">Log In here</a></div>
-								<!--end::Sign up-->
+								<!--end::Actions-->
 							</form>
 							<!--end::Form-->
 						</div>
@@ -186,7 +120,7 @@ include'connect/connect.php';
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/authentication/sign-up/general.js"></script>
+		<script src="assets/js/custom/authentication/sign-in/general.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>

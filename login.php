@@ -105,13 +105,7 @@ include'connect/connect.php';
 												<i class="bi bi-eye fs-2 d-none"></i>
 											</span>
 										</div>
-										<!--begin::Wrapper-->
-								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-									<div></div>
-									<!--begin::Link-->
-									<a href="authentication/layouts/corporate/reset-password.html" class="link-danger">Forgot Password ?</a>
-									<!--end::Link-->
-								</div>
+										
 										<!--end::Input wrapper-->
 										<!--begin::Meter-->
 										<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
@@ -128,6 +122,13 @@ include'connect/connect.php';
 									<!--end::Hint-->
 								</div>
 								<!--end::Input group=-->
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+									<div></div>
+									<!--begin::Link-->
+									<a href="forgot-password.php" class="link-danger">Forgot Password ?</a>
+									<!--end::Link-->
+								</div>
 
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
