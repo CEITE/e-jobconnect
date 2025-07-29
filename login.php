@@ -77,9 +77,20 @@ include'connect/connect.php';
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
+									<select  placeholder="Email" name="user_type" autocomplete="off" class="form-control bg-transparent" >
+										<option></option>
+										<option>Employer</option>
+										<option>Applicant</option>
+									</select>
+									<!--end::Email-->
+								</div>
+								<!--begin::Input group=-->
+								<div class="fv-row mb-8">
+									<!--begin::Email-->
 									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
 									<!--end::Email-->
 								</div>
+
 								<!--begin::Input group-->
 								<div class="fv-row mb-8" data-kt-password-meter="true">
 									<!--begin::Wrapper-->

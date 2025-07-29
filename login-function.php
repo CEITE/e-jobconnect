@@ -16,11 +16,18 @@
 				$type="admin";
 			}
 
-			$sql = "SELECT * FROM user WHERE email='$email' LIMIT 1";
+			$sql = "SELECT * FROM employer WHERE email='$email' LIMIT 1";
 			$result = $conn->query($sql);
 			
 			if ($result->num_rows > 0) {
-				$type="user";
+				$type="employer";
+			}
+
+			$sql = "SELECT * FROM applicant WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
+			
+			if ($result->num_rows > 0) {
+				$type="applicant";
 			}
 
 			
