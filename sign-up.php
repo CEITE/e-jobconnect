@@ -52,7 +52,7 @@ include'connect/connect.php';
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
-									<h1 class="text-gray-900 fw-bolder mb-3">Log In</h1>
+									<h1 class="text-gray-900 fw-bolder mb-3">Sign up</h1>
 									<!--end::Title-->
 								</div>
 								<!--begin::Heading-->
@@ -122,7 +122,7 @@ include'connect/connect.php';
 								<div class="d-grid mb-10">
 									<button type="submit" id="kt_sign_in_submit" class="btn btn-danger">
 										<!--begin::Indicator label-->
-										<span class="indicator-label">Sign In</span>
+										<span class="indicator-label">Create Account</span>
 										<!--end::Indicator label-->
 										<!--begin::Indicator progress-->
 										<span class="indicator-progress">Please wait... 
@@ -132,8 +132,8 @@ include'connect/connect.php';
 								</div>
 								<!--end::Submit button-->
 								<!--begin::Sign up-->
-								<div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? 
-								<a href="sign-up.php" class="link-danger">Sign up</a></div>
+								<div class="text-gray-500 text-center fw-semibold fs-6">Already a Member ? 
+								<a href="login.php" class="link-danger">Log In here</a></div>
 								<!--end::Sign up-->
 							</form>
 							<!--end::Form-->
