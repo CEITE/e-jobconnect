@@ -45,6 +45,14 @@
 						<span class="menu-title">List</span>
 					</a>
 					<!--end:Menu link-->
+					<!--begin:Menu link-->
+					<a class="menu-link" href="?page=application">
+						<span class="menu-bullet">
+							<span class="bullet bullet-dot"></span>
+						</span>
+						<span class="menu-title">Application</span>
+					</a>
+					<!--end:Menu link-->
 				</div>
 				<!--end:Menu item-->
 			</div>
@@ -61,7 +69,7 @@
 						<span class="path3"></span>
 					</i>
 				</span>
-				<span class="menu-title">Posted</span>
+				<span class="menu-title">Posting</span>
 				<span class="menu-arrow"></span>
 			</span>
 			<!--end:Menu link-->
@@ -70,27 +78,11 @@
 				<!--begin:Menu item-->
 				<div class="menu-item">
 					<!--begin:Menu link-->
-					<a class="menu-link" href="?page=student_attendance">
+					<a class="menu-link" href="?page=posting">
 						<span class="menu-bullet">
 							<span class="bullet bullet-dot"></span>
 						</span>
-						<span class="menu-title">Student</span>
-					</a>
-					<!--end:Menu link-->
-				</div>
-				<!--end:Menu item-->
-			</div>
-			<!--end:Menu sub-->
-			<!--begin:Menu sub-->
-			<div class="menu-sub menu-sub-accordion" kt-hidden-height="250" style="">
-				<!--begin:Menu item-->
-				<div class="menu-item">
-					<!--begin:Menu link-->
-					<a class="menu-link" href="?page=faculty_attendance">
-						<span class="menu-bullet">
-							<span class="bullet bullet-dot"></span>
-						</span>
-						<span class="menu-title">Faculty</span>
+						<span class="menu-title">list</span>
 					</a>
 					<!--end:Menu link-->
 				</div>

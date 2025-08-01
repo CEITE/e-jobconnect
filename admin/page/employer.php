@@ -175,7 +175,7 @@
 
         }
 ?>
-<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button>
+<!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button> -->
 <table id="kt_datatable_dom_positioning" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
@@ -198,11 +198,8 @@
                 <tr>
                     <td><?php echo$firstname?> <?php echo$lastname?></td>
                     <td><?php echo$email?></td>
-                    <td><span class="badge badge-light-success"><?php echo$status?>sadasd</td>
+                    <td><span class="badge badge-light-success"><?php echo$status?></td>
                     <td>
-                        <a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2"
-                        onclick="edits('<?php echo$id?>','<?php echo$student_number?>','<?php echo$firstname?>','<?php echo$lastname?>','<?php echo$email?>','<?php echo$contact?>','<?php echo$strand?>','<?php echo$grade?>','<?php echo$section?>')"
-                        ><i class="bi bi-pencil"></i> Edit</a>
                         <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
                     </td>
                 </tr>
@@ -256,14 +253,9 @@
 
            <form method="POST">
                 <div class="modal-body">
-                    <input class="form-control" type="" name="student_number" placeholder="Student Number"><br>
-                    <input class="form-control" type="" name="firstname" placeholder="First Name"><br>
-                    <input class="form-control" type="" name="lastname" placeholder="Last Name"><br>
+                    <input class="form-control" type="" name="firstname" placeholder="Firstname"><br>
+                    <input class="form-control" type="" name="lastname" placeholder="Lastname"><br>
                     <input class="form-control" type="email" name="email" placeholder="Email"><br>
-                    <input class="form-control" type="" name="contact" placeholder="Contact"><br>
-                    <input class="form-control" type="" name="strand" placeholder="Strand"><br>
-                    <input class="form-control" type="" name="grade" placeholder="Grade"><br>
-                    <input class="form-control" type="" name="section" placeholder="Section"><br>
                 </div>
 
                 <div class="modal-footer">
