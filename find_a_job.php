@@ -51,7 +51,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="index.php">POST A JOB</a> <a class="btn btn-primary display-7" href="find_a_job.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="index.php">POST A JOB</a> <a class="btn btn-primary display-7" href="index.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
 			</div>
 		</div>
 	</nav>
@@ -64,44 +64,62 @@
 
 	<div class="container">
 		<div class="row content-wrapper justify-content-center">
-			<div class="col-lg-7 mbr-form">
-				<div class="text-wrapper align-left" data-form-type="formoid">
-					<form  method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="OVt97Ziyb5MTDLxj54McNRsMaWSCvXjP9eGdcE8cQdjNYoo8rve7tH8j1voac19jKkekqKgfQgMKD/Mr206khvf0577aH4BboVBEBid77OvwkU13A7tFtB12GjTAR/bq">
-						<div class="dragArea row">
-							<div class="col-lg-12 col-md-12 col-sm-12">
-								<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong style="font-size: 4rem;">The Job Hunting in Sta.rosa Laguna</strong></h1>
-							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12">
-								<p class="mbr-text mbr-fonts-style mb-4 display-7">
-									Santa Rosa, Laguna is a vibrant city known for its rapid development, diverse economy, and status as a key transportation hub.</p>
-							</div>
-							<div data-for="email" class="col-lg-6 col-md-6 col-sm-12">
-								<input type="email" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
-							</div>
-							<div class="col-auto mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
-							<div class="row">
-								<div hidden="hidden" data-form-alert="" class="alert alert-success col-12"></div>
-								<div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-									Oops...! some problem!
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="col-lg-5 col-12">
-				<div class="image-wrapper">
-					<img class="w-100" src="assets/images/1200px-ph-fil-santa-rosa-laguna.png" alt="">
-				</div>
+			<div class="col-lg-12 mbr-form">
+                <div class="text-wrapper align-center" data-form-type="formoid">
+    				<div class="row">
+                        <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
+                        <input type="email" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
+                    </div>
+                </div>
 			</div>
 		</div>
+        <Br>
+        <div class="card bg-white">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-2">
+                        <img src="posted_images/sm.jpg">
+                    </div>
+                    <div class="col-md-10 ">
+                        <h2>Sales Representative-  <label class="light-success">FULL TIME</label></h2>
+                        <br>
+                        Alexander A. * <i>August 1 2025</i>
+                        <br>
+                        <p>
+                            We are looking for a motivated Sales Representative to help us grow our client base and promote Salary.com’s services globally. You'll be responsible for reaching out to potential clients, driving sales, and supporting our marketing campaigns.<br><br>
+
+                            Responsibilities:<br>
+                            * Reach out to potential clients via phone and email.<br>
+                            * Sell Upgrade to see actual info services to new and existing clients worldwide.<br>
+                            * Encourage participation in Upgrade to see actual info’s surveys on benefits and rewards.<br>
+                            * Identify new opportunities using sales tools.<br>
+                            * Plan and forecast sales for your assigned territory.<br>
+                            * Participate in weekly teaUpgrade to see actual infoetings and ongoing training.<br><br>
+
+                            Qualifications:<br>
+                            * Graduate of bachelor’s degree of any field (a must).<br>
+                            * At least 1 year of experience in the BPO industry (a must).<br>
+                            * Strong verbal and written communication skills.<br>
+                            * Able to work independently and with a team.<br>
+                            * Comfortable collaborating across departments.<br><br>
+
+                            Benefits:<br>
+                            * Work from Home – Flexible remote work.<br>
+                            * Paid Training – Full training provided.<br>
+                            * Weekends Off – Enjoy your weekends.<br>
+                            * Competitive Pay – Base salary plus bonuses and commissions.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 	</div>
 </section>
 
 <section data-bs-version="5.1" class="contacts01 cid-uSlhtrmf10" id="contacts01-2">
-    
-
-    
     
     <div class="container">
         <div class="row justify-content-center">
