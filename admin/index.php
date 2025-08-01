@@ -3,7 +3,7 @@ include'../connect/connect.php';
 session_start();
 
 	if(!isset($_SESSION['id'])){
-		header("location: ../");
+		header("location: ../login.php");
 	}else{
 		$id=$_SESSION['id'];
 	}
