@@ -66,7 +66,7 @@
 		<div class="row content-wrapper justify-content-center">
 			<div class="col-lg-7 mbr-form">
 				<div class="text-wrapper align-left" data-form-type="formoid">
-					<form  method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="OVt97Ziyb5MTDLxj54McNRsMaWSCvXjP9eGdcE8cQdjNYoo8rve7tH8j1voac19jKkekqKgfQgMKD/Mr206khvf0577aH4BboVBEBid77OvwkU13A7tFtB12GjTAR/bq">
+					<form  action="find_a_job.php" >
 						<div class="dragArea row">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong style="font-size: 4rem;">The Job Hunting in Sta.rosa Laguna</strong></h1>
@@ -76,15 +76,9 @@
 									Santa Rosa, Laguna is a vibrant city known for its rapid development, diverse economy, and status as a key transportation hub.</p>
 							</div>
 							<div data-for="email" class="col-lg-6 col-md-6 col-sm-12">
-								<input type="email" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+								<input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
 							</div>
 							<div class="col-auto mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
-							<div class="row">
-								<div hidden="hidden" data-form-alert="" class="alert alert-success col-12"></div>
-								<div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-									Oops...! some problem!
-								</div>
-							</div>
 						</div>
 					</form>
 				</div>
