@@ -51,7 +51,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="index.php">POST A JOB</a> <a class="btn btn-primary display-7" href="index.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="employer/">POST A JOB</a> <a class="btn btn-primary display-7" href="index.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
 			</div>
 		</div>
 	</nav>
@@ -106,7 +106,6 @@
                             * Comfortable collaborating across departments.<br><br>
 
                             Benefits:<br>
-                            * Work from Home – Flexible remote work.<br>
                             * Paid Training – Full training provided.<br>
                             * Weekends Off – Enjoy your weekends.<br>
                             * Competitive Pay – Base salary plus bonuses and commissions.<br>
