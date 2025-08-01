@@ -1,3 +1,8 @@
+<?php
+
+include'connect/connect.php';
+
+?>
 <!DOCTYPE html>
 <html  >
 <head>
@@ -76,44 +81,41 @@
 			</div>
 		</div>
         <Br>
-        <div class="card bg-white">
-            <div class="card-body">
-                <div class="row ">
-                    <div class="col-md-2">
-                        <img src="posted_images/sm.jpg">
+       <?php
+
+            $sql = "SELECT * FROM posting WHERE status='approved'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                extract($row);
+                    ?>
+                     <div class="card bg-white">
+                        <div class="card-header " style="background: none;">
+                            
+                            <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
+                            <h1><?php echo$title?></h1>
+                        </div>
+                        <div class="card-body">
+                            <?php echo $description?>
+                        </div>
+                        <div class="card-footer" style="background: none;">
+                            <center>
+                                <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn text-align-center">
+                                    <button type="submit" class="w-100 btn btn-primary display-7">
+                                        <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Apply Now
+                                    </button>
+                                </div>
+                            </center>
+                        </div>
+                        </div>
                     </div>
-                    <div class="col-md-10 ">
-                        <h2>Sales Representative-  <label class="light-success">FULL TIME</label></h2>
-                        <br>
-                        Alexander A. * <i>August 1 2025</i>
-                        <br>
-                        <p>
-                            We are looking for a motivated Sales Representative to help us grow our client base and promote Salary.com’s services globally. You'll be responsible for reaching out to potential clients, driving sales, and supporting our marketing campaigns.<br><br>
-
-                            Responsibilities:<br>
-                            * Reach out to potential clients via phone and email.<br>
-                            * Sell Upgrade to see actual info services to new and existing clients worldwide.<br>
-                            * Encourage participation in Upgrade to see actual info’s surveys on benefits and rewards.<br>
-                            * Identify new opportunities using sales tools.<br>
-                            * Plan and forecast sales for your assigned territory.<br>
-                            * Participate in weekly teaUpgrade to see actual infoetings and ongoing training.<br><br>
-
-                            Qualifications:<br>
-                            * Graduate of bachelor’s degree of any field (a must).<br>
-                            * At least 1 year of experience in the BPO industry (a must).<br>
-                            * Strong verbal and written communication skills.<br>
-                            * Able to work independently and with a team.<br>
-                            * Comfortable collaborating across departments.<br><br>
-
-                            Benefits:<br>
-                            * Paid Training – Full training provided.<br>
-                            * Weekends Off – Enjoy your weekends.<br>
-                            * Competitive Pay – Base salary plus bonuses and commissions.<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <?php
+              }
+            }
+            
+       ?>
         
 	</div>
 </section>

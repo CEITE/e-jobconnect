@@ -42,15 +42,7 @@
 						<span class="menu-bullet">
 							<span class="bullet bullet-dot"></span>
 						</span>
-						<span class="menu-title">list</span>
-					</a>
-					<!--end:Menu link-->
-					<!--begin:Menu link-->
-					<a class="menu-link" href="?page=application">
-						<span class="menu-bullet">
-							<span class="bullet bullet-dot"></span>
-						</span>
-						<span class="menu-title">Application</span>
+						<span class="menu-title">List</span>
 					</a>
 					<!--end:Menu link-->
 				</div>
