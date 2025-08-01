@@ -200,7 +200,7 @@
                     <td><?php echo$email?></td>
                     <td><span class="badge badge-light-success"><?php echo$status?></td>
                     <td>
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
+                        <a class="btn btn-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
                     </td>
                 </tr>
                 <?php
