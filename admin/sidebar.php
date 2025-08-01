@@ -1,4 +1,4 @@
-<!--begin:Menu item-->
+	<!--begin:Menu item-->
 	<div  class="menu-item ">
 		<!--begin:Menu link-->
 		<div class="menu-item pt-5">
@@ -28,7 +28,7 @@
 						<span class="path3"></span>
 					</i>
 				</span>
-				<span class="menu-title">Student</span>
+				<span class="menu-title">Applicant</span>
 				<span class="menu-arrow"></span>
 			</span>
 			<!--end:Menu link-->
@@ -59,7 +59,7 @@
 						<span class="path3"></span>
 					</i>
 				</span>
-				<span class="menu-title">Faculty</span>
+				<span class="menu-title">Employer</span>
 				<span class="menu-arrow"></span>
 			</span>
 			<!--end:Menu link-->
@@ -102,7 +102,7 @@
 						<span class="path3"></span>
 					</i>
 				</span>
-				<span class="menu-title">Attendance</span>
+				<span class="menu-title">Posted</span>
 				<span class="menu-arrow"></span>
 			</span>
 			<!--end:Menu link-->

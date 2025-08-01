@@ -9,8 +9,8 @@ session_start();
 	}
 
 	$sql = "SELECT u.*,
-	(SELECT COUNT(id) FROM faculty) AS faculty_count,
-	(SELECT COUNT(id) FROM student) AS student_count
+	(SELECT COUNT(id) FROM applicant) AS applicant,
+	(SELECT COUNT(id) FROM employer) AS employer
 	 FROM admin u WHERE id='$id'";
 	$result = $conn->query($sql);
 
@@ -24,7 +24,7 @@ session_start();
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<title>Web Based Fingerprint Attendance Monitoring System</title>
+		<title>E-JobConnect : Admin</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
@@ -107,7 +107,7 @@ session_start();
 												<!--end::Avatar-->
 												<!--begin::Username-->
 												<div class="d-flex flex-column">
-													<div class="fw-bold d-flex align-items-center fs-5"><?php echo$name?>
+													<div class="fw-bold d-flex align-items-center fs-5"><?php echo$firstname?> <?php echo$lastname?>
 													<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Admin</span></div>
 													<a href="#" class="fw-semibold text-muted text-hover-primary fs-7"><?php echo$email?></a>
 												</div>
@@ -238,6 +238,8 @@ session_start();
 								<img alt="Logo" src="../images/logo.png" class="h-35px app-sidebar-logo-minimize" />
 								
 							</a>
+							<h1>E-JobConnect</h1>
+
 							<!--end::Logo image-->
 							<!--begin::Sidebar toggle-->
 							<!--begin::Minimized sidebar setup:
@@ -318,7 +320,7 @@ session_start();
 								<!--begin::Copyright-->
 								<div class="text-gray-900 order-2 order-md-1">
 									<span class="text-muted fw-semibold me-1">2025&copy;</span>
-									<a href="#" target="_blank" class="text-gray-800 text-hover-primary">Web Based Fingerprint Attendance Monitoring System</a>
+									<a href="#" target="_blank" class="text-gray-800 text-hover-primary">Sta.rosa E-JobConnect</a>
 								</div>
 								<!--end::Copyright-->
 								<!--begin::Menu-->
