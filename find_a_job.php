@@ -74,60 +74,66 @@ include'connect/connect.php';
     				<form>
                         <div class="row">
                             <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+                                <input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn">
+                                <button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
+                        <br>
+                        <div class="row">
+                           <?php
+                            if(isset($_GET['search'])){
+                                extract($_GET);
+
+                                $search=$_GET['search'];
+
+                                $sql = "SELECT * FROM posting WHERE tagify LIKE '%".$search."%'  ORDER BY id DESC";
+                            }else{
+                                $sql = "SELECT * FROM posting WHERE status='approved' ORDER BY id DESC";
+                            }
+                            
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                              // output data of each row
+                              while($row = $result->fetch_assoc()) {
+                                extract($row);
+                                    ?>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="card bg-white">
+                                                <div class="card-header " style="background: none;">
+
+                                                    <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
+                                                    <h1><?php echo$title?></h1>
+                                                </div>
+                                                <div class="card-body">
+                                                    <?php echo $description?>
+
+                                                    
+                                                </div>
+                                                <div class="card-footer" style="background: none;">
+                                                    <center>
+                                                        <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn text-align-center">
+                                                            <button type="submit" class="w-100 btn btn-primary display-7">
+                                                                <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Apply Now
+                                                            </button>
+                                                        </div>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                              }
+                            }
+                            
+                       ?>
                         </div>
                     </form>
                 </div>
 			</div>
 		</div>
-        <Br>
-       <?php
-            if(isset($_GET['search'])){
-                extract($_GET);
-
-                $search=$_GET['search'];
-
-                $sql = "SELECT * FROM posting WHERE tagify LIKE '%".$search."%' ";
-            }else{
-                $sql = "SELECT * FROM posting WHERE status='approved'";
-            }
-            
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-              // output data of each row
-              while($row = $result->fetch_assoc()) {
-                extract($row);
-                    ?>
-                     <div class="card bg-white">
-                        <div class="card-header " style="background: none;">
-
-                            <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
-                            <h1><?php echo$title?></h1>
-                        </div>
-                        <div class="card-body">
-                            <?php echo $description?>
-
-                            
-                        </div>
-                        <div class="card-footer" style="background: none;">
-                            <center>
-                                <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn text-align-center">
-                                    <button type="submit" class="w-100 btn btn-primary display-7">
-                                        <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Apply Now
-                                    </button>
-                                </div>
-                            </center>
-                        </div>
-                        </div>
-                    </div>
-                    <?php
-              }
-            }
-            
-       ?>
+       
         
 	</div>
 </section>

@@ -202,7 +202,7 @@
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
             <th>Employer</th>
-            <th>Title</th>
+            <th>Company</th>
             <th>Date Created</th>
             <th>Skill requirements</th>
             <th>Status</th>
@@ -333,7 +333,7 @@
 
            <form method="POST">
                 <div class="modal-body">
-                    <input class="form-control" type="" name="title" placeholder="Title"><br>
+                    <input class="form-control" type="" name="title" placeholder="Company"><br>
                     <input type="hidden" name="employer_id" value="<?php echo$user_id?>">
                     <textarea id="kt_docs_tinymce_basic" name="description" class="tox-target" placeholder="Tell something you looking for"></textarea><br>
                     <div class="mb-10">
