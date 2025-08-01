@@ -11,56 +11,92 @@ include'connect/connect.php';
 	if (isset($_POST['submit'])) {
 	if (isset($_POST['email'])) {
         $email = $_POST['email'];
+        $pass = 'zvbx sict ephh ooxp';
 		$result = $conn->query("SELECT id FROM users WHERE email='$email'");
 
-		echo "<script>alert('$email')</script>";
 
 
-		if ($result->num_rows > 0) {
-			$token = bin2hex(random_bytes(16));
-			$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
-			
-			$conn->query("UPDATE users SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
-			$resetLink = "localhost/e-jobconnect-main/forgot-verified.php?token=$token";
-			
 
-			$mail = new PHPMailer\PHPMailer\PHPMailer();
+		try {
+		// Check if the email is already exist
+			$sql = "SELECT * FROM admin WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
 
-			try {
-				$verificationCode = strtoupper(bin2hex(random_bytes(4)));
+			$type = null;
 
-				$mail->isSMTP();
-				$mail->Host = 'smtp.gmail.com';
-				$mail->SMTPAuth = true;
-				$mail->Username = 'martylex7@gmail.com';
-				$mail->Password = 'zvbx sict ephh ooxp';
-				$mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
-				$mail->Port = 587;
-
-				$mail->setFrom('johnemmanuelpaliza@gmail.com', 'Sta. Rosa | E-JobConnect');
-				$mail->addAddress('johnemmanuelpaliza@gmail.com', 'Recipient Name');
-
-				$mail->isHTML(true);
-				$mail->Subject = 'Password Reset Request - Sta. Rosa | E-JobConnect';
-				$mail->Body    = "<p>Hi,</p>
-				<p>Click the link below to reset your password:</p>
-				<p><a href='$resetLink'>Reset Password</a></p>
-				<p>The link will expire in 1 hour.</p>";
-
-				if ($mail->send()) {
-					echo 'Message has been sent';
-				} else {
-					echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-				}
-			} catch (Exception $e) {
-				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			if ($result->num_rows > 0) {
+				$type="admin";
 			}
+
+
+			$sql = "SELECT * FROM employer WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
 			
+			if ($result->num_rows > 0) {
+				$type="employer";
+			}
+
+
+			$sql = "SELECT * FROM applicant WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
 			
-			echo "Check your email for the reset link.";
-		} else {
+			if ($result->num_rows > 0) {
+				$type="applicant";
+			}
+
+
+			$sql = "SELECT * FROM $type WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
+		// End of Function
+
+			if ($result->num_rows > 0) {
+				$token = bin2hex(random_bytes(16));
+				$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
+				
+				$conn->query("UPDATE $type SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
+				$resetLink = "https://e-jobconnect.ceitesystems.com//forgot-verified.php?type=$type&token=$token";
+				
+
+				$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+				try {
+					$verificationCode = strtoupper(bin2hex(random_bytes(4)));
+
+					$mail->isSMTP();
+					$mail->Host = 'smtp.gmail.com';
+					$mail->SMTPAuth = true;
+					$mail->Username = 'martylex7@gmail.com';
+					$mail->Password = $pass;
+					$mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+					$mail->Port = 587;
+
+					$mail->setFrom($email, 'Sta. Rosa | E-JobConnect');
+					$mail->addAddress($email, 'Recipient Name');
+
+					$mail->isHTML(true);
+					$mail->Subject = 'Password Reset Request - Sta. Rosa | E-JobConnect';
+					$mail->Body    = "<p>Hi,</p>
+					<p>Click the link below to reset your password:</p>
+					<p><a href='$resetLink'>Reset Password</a></p>
+					<p>The link will expire in 1 hour.</p>";
+
+					if ($mail->send()) {
+						echo 'Message has been sent';
+					} else {
+						echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+					}
+				} catch (Exception $e) {
+					echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+				}
+				
+			} else {
+				echo "No account found with that email.";
+			}
+		}
+		catch (Exception $e) {
 			echo "No account found with that email.";
 		}
+
 	}
 	}
 ?>
@@ -119,7 +155,7 @@ include'connect/connect.php';
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8 fv-plugins-icon-container">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent">
+									<input type="email" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent">
 									<!--end::Email-->
 								<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
 								<!--begin::Actions-->

@@ -112,29 +112,29 @@ var KTSignupGeneral = function () {
 
                         // Enable button
                         submitButton.disabled = false;
-
+                        form.submit();
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        Swal.fire({
-                            text: "You have successfully reset your password!",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        }).then(function (result) {
-                            if (result.isConfirmed) {
-                                form.reset();  // reset form
-                                passwordMeter.reset();  // reset password meter
-                                //form.submit();
+                        // Swal.fire({
+                        //     text: "You have successfully reset your password!",
+                        //     icon: "success",
+                        //     buttonsStyling: false,
+                        //     confirmButtonText: "Ok, got it!",
+                        //     customClass: {
+                        //         confirmButton: "btn btn-primary"
+                        //     }
+                        // }).then(function (result) {
+                        //     if (result.isConfirmed) {
+                        //         form.reset();  // reset form
+                        //         passwordMeter.reset();  // reset password meter
+                        //         //form.submit();
 
-                                //form.submit(); // submit form
-                                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
-                                }
-                            }
-                        });
+                        //         //form.submit(); // submit form
+                        //         var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                        //         if (redirectUrl) {
+                        //             location.href = redirectUrl;
+                        //         }
+                        //     }
+                        // });
                     }, 1500);
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/

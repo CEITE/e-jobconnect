@@ -6,6 +6,68 @@ include'connect/connect.php';
 		$type=$_SESSION['type'];
 		header("location: ../".$type."/");
 	}
+
+
+	if (isset($_POST['submit'])) {
+		$fname = $_POST['fname'];
+		$lname = $_POST['lname'];
+		$email = $_POST['email'];
+		$pass = md5($_POST['password']);
+		$role = $_POST['user_type'];
+
+		try {
+		// Check if the email is already exist
+			$sql = "SELECT * FROM admin WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
+
+			$type = null;
+
+			if ($result->num_rows > 0) {
+				$type="admin";
+			}
+
+
+			$sql = "SELECT * FROM employer WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
+			
+			if ($result->num_rows > 0) {
+				$type="employer";
+			}
+
+
+			$sql = "SELECT * FROM applicant WHERE email='$email' LIMIT 1";
+			$result = $conn->query($sql);
+			
+			if ($result->num_rows > 0) {
+				$type="applicant";
+			}
+
+			if ($type != null) {
+				$sql = "SELECT * FROM $type WHERE email='$email' LIMIT 1";
+				$result = $conn->query($sql);
+			}
+		// End of Function
+
+			if ($type != null) {
+				if ($result->num_rows > 0) {
+					echo "Account already exists";
+				}
+			} 
+			else {
+				$sql = "INSERT INTO $role (firstname, lastname, email, password, type) 
+				        VALUES ('$fname', '$lname', '$email', '$pass', '$role')";
+				$conn->query($sql);
+
+				echo "Welcome, $fname $lname!";
+			}
+		}
+		catch (Exception $e) {
+			echo "Something went wrong! $e";
+		}
+
+
+
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +110,7 @@ include'connect/connect.php';
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="#">
+							<form class="form w-100" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="" method="POST">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
@@ -79,15 +141,27 @@ include'connect/connect.php';
 									<!--begin::Email-->
 									<select  placeholder="Email" name="user_type" autocomplete="off" class="form-control bg-transparent" >
 										<option></option>
-										<option>Employer</option>
-										<option>Applicant</option>
+										<option value="employer">Employer</option>
+										<option value="applicant">Applicant</option>
 									</select>
 									<!--end::Email-->
 								</div>
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+									<input type="text" placeholder="First Name" name="fname" autocomplete="off" class="form-control bg-transparent" />
+									<!--end::Email-->
+								</div>
+								<!--begin::Input group=-->
+								<div class="fv-row mb-8">
+									<!--begin::Email-->
+									<input type="text" placeholder="Last Name" name="lname" autocomplete="off" class="form-control bg-transparent" />
+									<!--end::Email-->
+								</div>
+								<!--begin::Input group=-->
+								<div class="fv-row mb-8">
+									<!--begin::Email-->
+									<input type="email" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
 									<!--end::Email-->
 								</div>
 								<!--begin::Input group-->
@@ -130,7 +204,7 @@ include'connect/connect.php';
 								</div>
 								<!--begin::Submit button-->
 								<div class="d-grid mb-10">
-									<button type="submit" id="kt_sign_in_submit" class="btn btn-danger">
+									<button type="submit" name="submit" id="kt_sign_in_submit" class="btn btn-danger">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Create Account</span>
 										<!--end::Indicator label-->

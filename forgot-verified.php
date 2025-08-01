@@ -9,15 +9,16 @@ include'connect/connect.php';
 
 	if (isset($_POST['submit'])) {
 			$token = $_GET['token'];
+			$type = $_GET['type'];
 			$newPassword = $_POST['password'];
 
-			$result = $conn->query("SELECT * FROM users WHERE reset_token='$token' AND token_expiry > NOW()");
+			$result = $conn->query("SELECT * FROM $type WHERE reset_token='$token' AND token_expiry > NOW()");
 			
 			if ($result->num_rows > 0) {
 				$user = $result->fetch_assoc();
 				
-				$hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-				$conn->query("UPDATE users SET password='$hashedPassword', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
+				$hashedPassword = md5($newPassword);
+				$conn->query("UPDATE $type SET password='$hashedPassword', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
 
 				echo "Password has been reset successfully.";
 			} else {
@@ -83,7 +84,7 @@ include'connect/connect.php';
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8 fv-plugins-icon-container">
 									<!--begin::Email-->
-									<input type="text" placeholder="Enter new password" name="password" autocomplete="off" class="form-control bg-transparent">
+									<input type="password" placeholder="Enter new password" name="password" autocomplete="off" class="form-control bg-transparent">
 									<!--end::Email-->
 								<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
 								<!--begin::Actions-->
