@@ -74,7 +74,7 @@ include'connect/connect.php';
     				<form>
                         <div class="row">
                             <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+                            <input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
                         </div>
@@ -85,9 +85,11 @@ include'connect/connect.php';
         <Br>
        <?php
             if(isset($_GET['search'])){
-                extract($_GET['search']);
+                extract($_GET);
 
-                $sql = "SELECT * FROM posting WHERE status='approved' AND tagify LIKE '%$search%' ";
+                $search=$_GET['search'];
+
+                $sql = "SELECT * FROM posting WHERE tagify LIKE '%".$search."%' ";
             }else{
                 $sql = "SELECT * FROM posting WHERE status='approved'";
             }
@@ -107,6 +109,8 @@ include'connect/connect.php';
                         </div>
                         <div class="card-body">
                             <?php echo $description?>
+
+                            
                         </div>
                         <div class="card-footer" style="background: none;">
                             <center>
