@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2025 at 06:29 AM
+-- Generation Time: Aug 01, 2025 at 06:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,15 +34,17 @@ CREATE TABLE `admin` (
   `email` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
   `type` varchar(500) NOT NULL,
-  `attemp` int(250) NOT NULL
+  `attemp` int(250) NOT NULL,
+  `reset_token` varchar(500) NOT NULL,
+  `token_expiry` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`) VALUES
-(1, 'Admin', 'Admin', 'admin@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'admin', 0);
+INSERT INTO `admin` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`, `reset_token`, `token_expiry`) VALUES
+(1, 'Admin', 'Admin', 'admin@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'admin', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -57,15 +59,17 @@ CREATE TABLE `applicant` (
   `email` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
   `type` varchar(500) NOT NULL,
-  `attemp` int(250) NOT NULL
+  `attemp` int(250) NOT NULL,
+  `reset_token` varchar(500) NOT NULL,
+  `token_expiry` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `applicant`
 --
 
-INSERT INTO `applicant` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`) VALUES
-(1, 'user', 'user', 'user@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'user', 0);
+INSERT INTO `applicant` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`, `reset_token`, `token_expiry`) VALUES
+(1, 'applicant', 'applicant', 'applicant@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'applicant', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -80,15 +84,29 @@ CREATE TABLE `employer` (
   `email` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
   `type` varchar(500) NOT NULL,
-  `attemp` int(250) NOT NULL
+  `attemp` int(250) NOT NULL,
+  `reset_token` varchar(500) NOT NULL,
+  `token_expiry` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employer`
 --
 
-INSERT INTO `employer` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`) VALUES
-(1, 'user', 'user', 'user@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'user', 0);
+INSERT INTO `employer` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`, `reset_token`, `token_expiry`) VALUES
+(1, 'employer', 'employer', 'employer@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'employer', 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
