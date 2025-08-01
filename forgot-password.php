@@ -1,10 +1,67 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
 include'connect/connect.php';
 
 	if(isset($_SESSION['id'])){
 		$type=$_SESSION['type'];
 		header("location: ../".$type."/");
+	}
+
+	if (isset($_POST['submit'])) {
+	if (isset($_POST['email'])) {
+        $email = $_POST['email'];
+		$result = $conn->query("SELECT id FROM users WHERE email='$email'");
+
+		echo "<script>alert('$email')</script>";
+
+
+		if ($result->num_rows > 0) {
+			$token = bin2hex(random_bytes(16));
+			$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
+			
+			$conn->query("UPDATE users SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
+			$resetLink = "localhost/e-jobconnect-main/forgot-verified.php?token=$token";
+			
+
+			$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+			try {
+				$verificationCode = strtoupper(bin2hex(random_bytes(4)));
+
+				$mail->isSMTP();
+				$mail->Host = 'smtp.gmail.com';
+				$mail->SMTPAuth = true;
+				$mail->Username = 'martylex7@gmail.com';
+				$mail->Password = 'zvbx sict ephh ooxp';
+				$mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+				$mail->Port = 587;
+
+				$mail->setFrom('johnemmanuelpaliza@gmail.com', 'Sta. Rosa | E-JobConnect');
+				$mail->addAddress('johnemmanuelpaliza@gmail.com', 'Recipient Name');
+
+				$mail->isHTML(true);
+				$mail->Subject = 'Password Reset Request - Sta. Rosa | E-JobConnect';
+				$mail->Body    = "<p>Hi,</p>
+				<p>Click the link below to reset your password:</p>
+				<p><a href='$resetLink'>Reset Password</a></p>
+				<p>The link will expire in 1 hour.</p>";
+
+				if ($mail->send()) {
+					echo 'Message has been sent';
+				} else {
+					echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+				}
+			} catch (Exception $e) {
+				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			}
+			
+			
+			echo "Check your email for the reset link.";
+		} else {
+			echo "No account found with that email.";
+		}
+	}
 	}
 ?>
 <!DOCTYPE html>
@@ -48,7 +105,7 @@ include'connect/connect.php';
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
-							<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_password_reset_form" data-kt-redirect-url="authentication/layouts/corporate/new-password.html" action="#">
+							<form method="POST" class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="kt_password_reset_form" data-kt-redirect-url="authentication/layouts/corporate/new-password.html" action="#">
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
@@ -67,7 +124,7 @@ include'connect/connect.php';
 								<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
 								<!--begin::Actions-->
 								<div class="d-flex flex-wrap justify-content-center pb-lg-0">
-									<button type="button" id="kt_password_reset_submit" class="btn btn-danger me-4">
+									<button type="submit" id="kt_password_reset_submit" name="submit" class="btn btn-danger me-4">
 										<!--begin::Indicator label-->
 										<span class="indicator-label">Submit</span>
 										<!--end::Indicator label-->
