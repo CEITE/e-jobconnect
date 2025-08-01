@@ -6,6 +6,24 @@ include'connect/connect.php';
 		$type=$_SESSION['type'];
 		header("location: ../".$type."/");
 	}
+
+	if (isset($_POST['submit'])) {
+			$token = $_GET['token'];
+			$newPassword = $_POST['password'];
+
+			$result = $conn->query("SELECT * FROM users WHERE reset_token='$token' AND token_expiry > NOW()");
+			
+			if ($result->num_rows > 0) {
+				$user = $result->fetch_assoc();
+				
+				$hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+				$conn->query("UPDATE users SET password='$hashedPassword', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
+
+				echo "Password has been reset successfully.";
+			} else {
+				echo "Invalid or expired token.";
+			}
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,62 +65,43 @@ include'connect/connect.php';
 					<div class="d-flex flex-center flex-column flex-lg-row-fluid">
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
+
+
+
 							<!--begin::Form-->
-							<form class="form w-100 mb-13" novalidate="novalidate" data-kt-redirect-url="index.html" id="kt_sing_in_two_factor_form">
-								<!--begin::Icon-->
-								<div class="text-center mb-10">
-									<img alt="Logo" class="mh-125px" src="assets/media/svg/misc/smartphone-2.svg">
-								</div>
-								<!--end::Icon-->
+							<form method="POST" class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="kt_password_reset_form" data-kt-redirect-url="authentication/layouts/corporate/new-password.html" action="#">
 								<!--begin::Heading-->
 								<div class="text-center mb-10">
 									<!--begin::Title-->
-									<h1 class="text-gray-900 mb-3">Two-Factor Verification</h1>
+									<h1 class="text-gray-900 fw-bolder mb-3">Forgot Password ?</h1>
 									<!--end::Title-->
-									<!--begin::Sub-title-->
-									<div class="text-muted fw-semibold fs-5 mb-5">Enter the verification code we sent to</div>
-									<!--end::Sub-title-->
-									<!--begin::Mobile no-->
-									<!-- <div class="fw-bold text-gray-900 fs-3">******7859</div> -->
-									<!--end::Mobile no-->
+									<!--begin::Link-->
+									<div class="text-gray-500 fw-semibold fs-6">Enter your email to reset your password.</div>
+									<!--end::Link-->
 								</div>
-								<!--end::Heading-->
-								<!--begin::Section-->
-								<div class="mb-10">
-									<!--begin::Label-->
-									<div class="fw-bold text-start text-gray-900 fs-6 mb-1 ms-1">Type your 6 digit security code</div>
-									<!--end::Label-->
-									<!--begin::Input group-->
-									<div class="d-flex flex-wrap flex-stack">
-										<input type="text" name="code_1" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-										<input type="text" name="code_2" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-										<input type="text" name="code_3" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-										<input type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-										<input type="text" name="code_5" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-										<input type="text" name="code_6" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" inputmode="text">
-									</div>
-									<!--begin::Input group-->
-								</div>
-								<!--end::Section-->
-								<!--begin::Submit-->
-								<div class="d-flex flex-center">
-									<button type="button" id="kt_sing_in_two_factor_submit" class="btn btn-lg btn-danger fw-bold">
+								<!--begin::Heading-->
+								<!--begin::Input group=-->
+								<div class="fv-row mb-8 fv-plugins-icon-container">
+									<!--begin::Email-->
+									<input type="text" placeholder="Enter new password" name="password" autocomplete="off" class="form-control bg-transparent">
+									<!--end::Email-->
+								<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
+								<!--begin::Actions-->
+								<div class="d-flex flex-wrap justify-content-center pb-lg-0">
+									<button type="submit" id="kt_password_reset_submit" name="submit" class="btn btn-danger me-4">
+										<!--begin::Indicator label-->
 										<span class="indicator-label">Submit</span>
+										<!--end::Indicator label-->
+										<!--begin::Indicator progress-->
 										<span class="indicator-progress">Please wait... 
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+										<!--end::Indicator progress-->
 									</button>
+									<a href="authentication/layouts/corporate/sign-in.html" class="btn btn-light">Cancel</a>
 								</div>
-								<!--end::Submit-->
+								<!--end::Actions-->
 							</form>
 							<!--end::Form-->
-							<!--begin::Notice-->
-							<div class="text-center fw-semibold fs-5">
-								<span class="text-muted me-1">Didn’t get the code ?</span>
-								<a href="#" class="link-danger fs-5 me-1">Resend</a>
-								<span class="text-muted me-1">or</span>
-								<a href="#" class="link-danger fs-5">Call Us</a>
-							</div>
-							<!--end::Notice-->
 						</div>
 						<!--end::Wrapper-->
 					</div>
