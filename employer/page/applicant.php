@@ -1,5 +1,5 @@
 <?php
-    $table="faculty";
+    $table="applicant";
     $error=0;
 
     if(isset($_POST['add'])){
@@ -27,16 +27,17 @@
             $data.=", date_created=NOW()";
 
 
+
             // $data.=", admin_id='$user_id'";
            $sql="INSERT INTO $table SET $data";
 
            if ($conn->query($sql) === TRUE) {
              $last_id = $conn->insert_id;
 
-
-                ?>
+             ?>
              <script type="text/javascript">
-                window.open('fingerprint.php?page=faculty&id=<?php echo$last_id?>&action=enroll','_parent');
+                window.open('fingerprint.php?page=student&id=<?php echo$last_id?>&action=enroll','_parent');
+                 //location.href="?page=student&id=<?php echo$last_id?>&action=enroll"
              </script>
              <?php
             } else {
@@ -81,8 +82,8 @@
             } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
     }
+    
     if(isset($_GET['remove'])){
         extract($_GET);
             $data="";
@@ -174,14 +175,13 @@
 
         }
 ?>
-<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button>
+<!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button> -->
 <table id="kt_datatable_dom_positioning" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
-            <th>Faculty Number</th>
-            <th>Name</th>
+            <th>Fullname</th>
             <th>Email</th>
-            <th>Number</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -196,15 +196,11 @@
                 extract($row);
                 ?>
                 <tr>
-                    <td><?php echo$faculty_number?></td>
-                    <td><?php echo$firstname?></td>
+                    <td><?php echo$firstname?> <?php echo$lastname?></td>
                     <td><?php echo$email?></td>
-                    <td><?php echo$contact?></td>
+                    <td><span class="badge badge-light-success"><?php echo$status?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2"
-                        onclick="edits('<?php echo$id?>','<?php echo$faculty_number?>','<?php echo$firstname?>','<?php echo$lastname?>','<?php echo$email?>','<?php echo$contact?>')"
-                        ><i class="bi bi-pencil"></i></a>
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i></a>
+                        <a class="btn btn-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
                     </td>
                 </tr>
                 <?php
@@ -237,6 +233,8 @@
 
     setTimeout(function() {
         table();
+        $('#myModal').modal('show');
+
     }, 1000);
 </script>
 
@@ -255,11 +253,9 @@
 
            <form method="POST">
                 <div class="modal-body">
-                    <input class="form-control" type="" name="faculty_number" placeholder="Faculty Number"><br>
-                    <input class="form-control" type="" name="firstname" placeholder="First Name"><br>
-                    <input class="form-control" type="" name="lastname" placeholder="Last Name"><br>
-                    <input class="form-control" type="" name="email" placeholder="Email"><br>
-                    <input class="form-control" type="" name="contact" placeholder="Contact"><br>
+                    <input class="form-control" type="" name="firstname" placeholder="Firstname"><br>
+                    <input class="form-control" type="" name="lastname" placeholder="Lastname"><br>
+                    <input class="form-control" type="email" name="email" placeholder="Email"><br>
                 </div>
 
                 <div class="modal-footer">
@@ -271,15 +267,18 @@
     </div>
 </div>
 <script type="text/javascript">
-    function edits(id,faculty_number,firstname,lastname,email,contact){
+    function edits(id,student_number,firstname,lastname,email,contact,strand,grade,section){
         var form= document.edit;
 
         form.id.value=id;
-        form.faculty_number.value=faculty_number;
+        form.student_number.value=student_number;
         form.firstname.value=firstname;
         form.lastname.value=lastname;
         form.email.value=email;
         form.contact.value=contact;
+        form.strand.value=strand;
+        form.grade.value=grade;
+        form.section.value=section;
     }
 </script>
 <div class="modal fade" tabindex="-1" id="kt_modal_2">
@@ -298,11 +297,14 @@
            <form method="POST" name="edit">
                 <div class="modal-body">
                     <input class="form-control" type="hidden" name="id"><br>
-                    <input class="form-control" type="" name="faculty_number" placeholder="Faculty Number"><br>
+                    <input class="form-control" type="" name="student_number" placeholder="Student Number"><br>
                     <input class="form-control" type="" name="firstname" placeholder="Firstname"><br>
                     <input class="form-control" type="" name="lastname" placeholder="Lastname"><br>
                     <input class="form-control" type="" name="email" placeholder="Email"><br>
                     <input class="form-control" type="" name="contact" placeholder="Contact"><br>
+                    <input class="form-control" type="" name="strand" placeholder="Strand"><br>
+                    <input class="form-control" type="" name="grade" placeholder="Grade"><br>
+                    <input class="form-control" type="" name="section" placeholder="Section"><br>
                 </div>
 
                 <div class="modal-footer">
@@ -350,64 +352,3 @@
 </div>
 
 
-<script type="text/javascript">
-    function loadDoc() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-         console.log(this.response);//
-         if(this.response>=1){
-            var link = "fingerprint.php?action=enroll&id="+this.response;
-            document.getElementById('myLink').setAttribute("href",link);
-            if($('#kt_modal_4').hasClass('show')){
-
-            }else{
-                 $('#kt_modal_4').modal('show');
-            }
-         }else{
-            if($('#kt_modal_4').hasClass('show')){
-                $('#kt_modal_4').modal('hide');
-                location.href="?page=faculty";
-            }else{
-                 // $('#kt_modal_4').modal('show');
-            }
-         }
-        }
-      };
-
-      xhttp.open("GET", "page/check_fingerprint.php?table=faculty", true);
-      xhttp.send();
-    }
-    setInterval(loadDoc, 1000);
-</script>
-
-
-
-<div class="modal fade" tabindex="-1" id="kt_modal_4">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Place your fingerprint</h3>
-
-                <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                </div>
-                <!--end::Close-->
-            </div>
-                <div class="modal-body">
-                    <center>
-                        <i class="ki-duotone ki-fingerprint-scanning display-1 text-primary">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                            <span class="path3"></span>
-                        </i>
-                    </center>
-                </div>
-
-                <div class="modal-footer">
-                    <center><a class="btn btn-primary" id="myLink" href=""><i class=""></i>Rescan</a></center>
-                </div>
-        </div>
-    </div>
-</div>

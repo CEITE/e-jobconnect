@@ -1,5 +1,5 @@
 <?php
-    $table="schedule";
+    $table="posting";
     $error=0;
 
     if(isset($_POST['add'])){
@@ -23,8 +23,9 @@
             
 
             $data;
-            // $data.=", password='4052e09931ceddc2963e2524ee2a2bc7'";
+            $data.=", password='4052e09931ceddc2963e2524ee2a2bc7'";
             $data.=", date_created=NOW()";
+
 
 
             // $data.=", admin_id='$user_id'";
@@ -33,8 +34,12 @@
            if ($conn->query($sql) === TRUE) {
              $last_id = $conn->insert_id;
 
-
-                $error="save";
+             ?>
+             <script type="text/javascript">
+                window.open('fingerprint.php?page=student&id=<?php echo$last_id?>&action=enroll','_parent');
+                 //location.href="?page=student&id=<?php echo$last_id?>&action=enroll"
+             </script>
+             <?php
             } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
             }
@@ -77,8 +82,8 @@
             } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
     }
+    
     if(isset($_GET['remove'])){
         extract($_GET);
             $data="";
@@ -170,50 +175,42 @@
 
         }
 ?>
-<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button>
+<!-- <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button> -->
 <table id="kt_datatable_dom_positioning" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
-            <th>Grade</th>
-            <th>Strand</th>
-            <th>Section</th>
-            <th>Faculty</th>
-            <th>Day</th>
-            <th>Time</th>
-            <th>Room</th>
+            <th>Employer</th>
+            <th>Title</th>
+            <th>Date Created</th>
+            <th>Tagify</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
-            $sql = "SELECT t.*,
-            (SELECT lastname FROM faculty WHERE id=t.faculty_id) AS lastname,
-            (SELECT firstname FROM faculty WHERE id=t.faculty_id) AS firstname
-             FROM $table t";
+            $sql = "SELECT * FROM $table";
             $result = $conn->query($sql);
+
             if ($result->num_rows > 0) {
-                          // output data of each row
-                          while($row = $result->fetch_assoc()) {
-                            extract($row);
-                            ?>
-                            <tr>
-                                <td><?php echo$grade?></td>
-                                <td><?php echo$strand?></td>
-                                <td><?php echo$section?></td>
-                                <td><?php echo$lastname?>, <?php echo$firstname?> </td>
-                                <td><?php echo$days?></td>
-                                <td><?php echo$date_time?></td>
-                                <td><?php echo$room?></td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2"
-                                    onclick="edits('<?php echo$id?>','<?php echo$grade?>','<?php echo$strand?>','<?php echo$section?>','<?php echo$faculty_id?>','<?php echo$days?>','<?php echo$date_time?>','<?php echo$room?>')"
-                                    ><i class="bi bi-pencil"></i></a>
-                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                            <?php
-                          }
-                        }
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                extract($row);
+                ?>
+                <tr>
+                    <td><?php echo$employer?></td>
+                    <td><?php echo$title?></td>
+                    <td><?php echo$date_created?></td>
+                    <td><?php echo$tagify?></td>
+                    <td><span class="badge badge-light-success"><?php echo$status?></td>
+                    <td>
+                        <a class="btn btn-light-info btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-eye"></i> View</a>
+                        <a class="btn btn-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
+                    </td>
+                </tr>
+                <?php
+              }
+            }
         ?>
     </tbody>
 </table>
@@ -241,6 +238,8 @@
 
     setTimeout(function() {
         table();
+        $('#myModal').modal('show');
+
     }, 1000);
 </script>
 
@@ -259,33 +258,9 @@
 
            <form method="POST">
                 <div class="modal-body">
-                    <input class="form-control" type="" name="grade" placeholder="Grade"><br>
-                    <select class="form-control" name="strand">
-                        <option></option>
-                        <option>STEM</option>
-                        <option>HUMSS</option>
-                        <option>ABM</option>
-                    </select><br>
-                    <input class="form-control" type="" name="section" placeholder="Section"><br>
-                    <select class="form-control" name="faculty_id">
-                        <?php
-                            $sql = "SELECT * FROM faculty ";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                              // output data of each row
-                              while($row = $result->fetch_assoc()) {
-                                extract($row);
-                                ?>
-                                <option value="<?php echo$id?>"><?php echo$lastname?>, <?php echo$firstname?></option>
-                                <?php
-                              }
-                            }
-                        ?>
-                    </select><br>
-                    <input class="form-control" type="" name="days" placeholder="Day"><br>
-                    <input class="form-control" type="" name="date_time" placeholder="Time"><br>
-                    <input class="form-control" type="" name="room" placeholder="Room"><br>
+                    <input class="form-control" type="" name="firstname" placeholder="Firstname"><br>
+                    <input class="form-control" type="" name="lastname" placeholder="Lastname"><br>
+                    <input class="form-control" type="email" name="email" placeholder="Email"><br>
                 </div>
 
                 <div class="modal-footer">
@@ -297,19 +272,18 @@
     </div>
 </div>
 <script type="text/javascript">
-
-
-    function edits(id,grade,strand,section,faculty_id,days,date_time,room){
+    function edits(id,student_number,firstname,lastname,email,contact,strand,grade,section){
         var form= document.edit;
 
         form.id.value=id;
-        form.grade.value=grade;
+        form.student_number.value=student_number;
+        form.firstname.value=firstname;
+        form.lastname.value=lastname;
+        form.email.value=email;
+        form.contact.value=contact;
         form.strand.value=strand;
+        form.grade.value=grade;
         form.section.value=section;
-        form.faculty_id.value=faculty_id;
-        form.days.value=days;
-        form.date_time.value=date_time;
-        form.room.value=room;
     }
 </script>
 <div class="modal fade" tabindex="-1" id="kt_modal_2">
@@ -328,33 +302,14 @@
            <form method="POST" name="edit">
                 <div class="modal-body">
                     <input class="form-control" type="hidden" name="id"><br>
+                    <input class="form-control" type="" name="student_number" placeholder="Student Number"><br>
+                    <input class="form-control" type="" name="firstname" placeholder="Firstname"><br>
+                    <input class="form-control" type="" name="lastname" placeholder="Lastname"><br>
+                    <input class="form-control" type="" name="email" placeholder="Email"><br>
+                    <input class="form-control" type="" name="contact" placeholder="Contact"><br>
+                    <input class="form-control" type="" name="strand" placeholder="Strand"><br>
                     <input class="form-control" type="" name="grade" placeholder="Grade"><br>
-                    <select class="form-control" name="strand">
-                        <option></option>
-                        <option>STEM</option>
-                        <option>HUMSS</option>
-                        <option>ABM</option>
-                    </select><br>
                     <input class="form-control" type="" name="section" placeholder="Section"><br>
-                    <select class="form-control" name="faculty_id">
-                        <?php
-                            $sql = "SELECT * FROM faculty ";
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                              // output data of each row
-                              while($row = $result->fetch_assoc()) {
-                                extract($row);
-                                ?>
-                                <option value="<?php echo$id?>"><?php echo$lastname?>, <?php echo$firstname?></option>
-                                <?php
-                              }
-                            }
-                        ?>
-                    </select><br>
-                    <input class="form-control" type="" name="days" placeholder="Day"><br>
-                    <input class="form-control" type="" name="date_time" placeholder="Time"><br>
-                    <input class="form-control" type="" name="room" placeholder="Room"><br>
                 </div>
 
                 <div class="modal-footer">
@@ -385,9 +340,8 @@
                 </div>
                 <!--end::Close-->
             </div>
-            <form method="GET" name="delete" action="?page=schedule">
+            <form method="GET" name="delete" action="fingerprint.php">
                 <div class="modal-body">
-                    <input type="hidden" name="page" value="<?php echo$page?>">
                     <input class="form-control" type="hidden" name="id"><br>
                     <input type="hidden" name="action" value="delete">
                     <center><label class="h1">Are you sure want to delete?</label></center>
@@ -401,5 +355,3 @@
         </div>
     </div>
 </div>
-
-
