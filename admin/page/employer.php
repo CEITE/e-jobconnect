@@ -1,5 +1,5 @@
 <?php
-    $table="student";
+    $table="employer";
     $error=0;
 
     if(isset($_POST['add'])){
@@ -179,13 +179,9 @@
 <table id="kt_datatable_dom_positioning" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
-            <th>Student Number</th>
-            <th>Name</th>
+            <th>Fullname</th>
             <th>Email</th>
-            <th>Number</th>
-            <th>Strand</th>
-            <th>Grade</th>
-            <th>Section</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -200,18 +196,14 @@
                 extract($row);
                 ?>
                 <tr>
-                    <td><?php echo$student_number?></td>
-                    <td><?php echo$firstname?></td>
+                    <td><?php echo$firstname?> <?php echo$lastname?></td>
                     <td><?php echo$email?></td>
-                    <td><?php echo$contact?></td>
-                    <td><?php echo$strand?></td>
-                    <td><?php echo$grade?></td>
-                    <td><?php echo$section?></td>
+                    <td><span class="badge badge-light-success"><?php echo$status?>sadasd</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2"
+                        <a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2"
                         onclick="edits('<?php echo$id?>','<?php echo$student_number?>','<?php echo$firstname?>','<?php echo$lastname?>','<?php echo$email?>','<?php echo$contact?>','<?php echo$strand?>','<?php echo$grade?>','<?php echo$section?>')"
-                        ><i class="bi bi-pencil"></i></a>
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i></a>
+                        ><i class="bi bi-pencil"></i> Edit</a>
+                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
                     </td>
                 </tr>
                 <?php
