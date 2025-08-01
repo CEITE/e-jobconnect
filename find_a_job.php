@@ -71,19 +71,27 @@ include'connect/connect.php';
 		<div class="row content-wrapper justify-content-center">
 			<div class="col-lg-12 mbr-form">
                 <div class="text-wrapper align-center" data-form-type="formoid">
-    				<div class="row">
-                        <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
-                        <input type="email" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
-                    </div>
+    				<form>
+                        <div class="row">
+                            <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
+                        </div>
+                    </form>
                 </div>
 			</div>
 		</div>
         <Br>
        <?php
+            if(isset($_GET['search'])){
+                extract($_GET['search']);
 
-            $sql = "SELECT * FROM posting WHERE status='approved'";
+                $sql = "SELECT * FROM posting WHERE status='approved' AND tagify LIKE '%$search%' ";
+            }else{
+                $sql = "SELECT * FROM posting WHERE status='approved'";
+            }
+            
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -93,7 +101,7 @@ include'connect/connect.php';
                     ?>
                      <div class="card bg-white">
                         <div class="card-header " style="background: none;">
-                            
+
                             <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
                             <h1><?php echo$title?></h1>
                         </div>
