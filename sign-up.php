@@ -71,7 +71,7 @@ include'connect/connect.php';
 					$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 					$conn->query("UPDATE $role SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
 
-				    $link_verification = "https://e-jobconnect.ceitesystems.com/index.php?token=$token&type=$role";
+				    $link_verification = "localhost/e-jobconnect/index.php?token=$token&type=$role";
 
 				    $mail->isSMTP();
 				    $mail->Host = 'smtp.gmail.com';

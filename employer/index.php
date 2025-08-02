@@ -11,7 +11,7 @@ session_start();
 	$sql = "SELECT u.*,
 	(SELECT COUNT(id) FROM applicant) AS applicant,
 	(SELECT COUNT(id) FROM employer) AS employer
-	 FROM admin u WHERE id='$id'";
+	 FROM employer u WHERE id='$id'";
 	$result = $conn->query($sql);
 
 	$row = $result->fetch_assoc();
