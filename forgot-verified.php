@@ -18,7 +18,10 @@ include'connect/connect.php';
 				$user = $result->fetch_assoc();
 				
 				$hashedPassword = md5($newPassword);
+
 				$conn->query("UPDATE $type SET password='$hashedPassword', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
+
+				$conn->query("UPDATE users SET password='$hashedPassword', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
 
 				echo "Password has been reset successfully.";
 			} else {

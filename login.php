@@ -48,7 +48,7 @@ include'connect/connect.php';
 						<!--begin::Wrapper-->
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
-							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="login-function.php" method="POST">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.php" action="login-function.php" method="POST">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
@@ -74,16 +74,6 @@ include'connect/connect.php';
 								?>
 								<!--begin::Input group=-->
 								<!--end::Separator-->
-								<!--begin::Input group=-->
-								<div class="fv-row mb-8">
-									<!--begin::Email-->
-									<select  placeholder="Email" name="user_type" autocomplete="off" class="form-control bg-transparent" >
-										<option></option>
-										<option>Employer</option>
-										<option>Applicant</option>
-									</select>
-									<!--end::Email-->
-								</div>
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
@@ -160,7 +150,7 @@ include'connect/connect.php';
 					<!--begin::Content-->
 					<div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
 						<!--begin::Logo-->
-						<a href="index.html" class="mb-0 mb-lg-12">
+						<a href="index.php" class="mb-0 mb-lg-12">
 							<img alt="Logo" src="assets/images/seal-of-santa-rosa-laguna-2.png" type="image/x-icon" class="h-60px h-lg-100px" />
 						</a>
 						<!--end::Logo-->

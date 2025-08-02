@@ -111,6 +111,7 @@ include'connect/connect.php';
 						<div class="w-lg-500px p-10">
 							<!--begin::Form-->
 							<form class="form w-100" id="kt_sign_in_form" data-kt-redirect-url="index.html" action="" method="POST">
+							<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="index.php" action="#">
 								<!--begin::Heading-->
 								<div class="text-center mb-11">
 									<!--begin::Title-->
@@ -232,7 +233,7 @@ include'connect/connect.php';
 					<!--begin::Content-->
 					<div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
 						<!--begin::Logo-->
-						<a href="index.html" class="mb-0 mb-lg-12">
+						<a href="index.php" class="mb-0 mb-lg-12">
 							<img alt="Logo" src="assets/images/seal-of-santa-rosa-laguna-2.png" type="image/x-icon" class="h-60px h-lg-100px" />
 						</a>
 						<!--end::Logo-->

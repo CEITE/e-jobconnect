@@ -18,7 +18,7 @@
 		    <!--end::Header-->
 		</div>
 		<div class="row">
-			<div class="col-md-4 col-6">
+			<div class="col-md-3 col-6">
 				<div class="card card-flush  mb-5 mb-xl-10">
 				    <!--begin::Header-->
 				    <div class="card-header pt-5">
@@ -36,7 +36,7 @@
 				    <!--end::Header-->
 				</div>
 			</div>
-			<div class="col-md-4 col-6">
+			<div class="col-md-3 col-6">
 				<div class="card card-flush  mb-5 mb-xl-10">
 				    <!--begin::Header-->
 				    <div class="card-header pt-5">
@@ -54,7 +54,7 @@
 				    <!--end::Header-->
 				</div>
 			</div>
-			<div class="col-md-4 col-6">
+			<div class="col-md-3 col-6">
 				<div class="card card-flush  mb-5 mb-xl-10">
 				    <!--begin::Header-->
 				    <div class="card-header pt-5">
@@ -65,6 +65,24 @@
 				            <!--end::Amount--> 
 				            <!--begin::Subtitle-->
 				            <span class="text-gray-500 pt-1 fw-semibold fs-6">Posted</span>
+				            <!--end::Subtitle--> 
+				        </div>
+				        <!--end::Title-->           
+				    </div>
+				    <!--end::Header-->
+				</div>
+			</div>
+			<div class="col-md-3 col-6">
+				<div class="card card-flush  mb-5 mb-xl-10">
+				    <!--begin::Header-->
+				    <div class="card-header pt-5">
+				        <!--begin::Title-->
+				        <div class="card-title d-flex flex-column">                
+				            <!--begin::Amount-->
+				            <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">130</span>
+				            <!--end::Amount--> 
+				            <!--begin::Subtitle-->
+				            <span class="text-gray-500 pt-1 fw-semibold fs-6">Application</span>
 				            <!--end::Subtitle--> 
 				        </div>
 				        <!--end::Title-->           

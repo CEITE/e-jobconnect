@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  >
 <head>
-  <!-- Site made with Mobirise Website Builder v6.0.5, https://mobirise.com -->
+  <!-- Site made with  v6.0.5, https://mobirise.com -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v6.0.5, mobirise.com">
@@ -35,11 +35,11 @@
 		<div class="container">
 			<div class="navbar-brand">
 				<span class="navbar-logo">
-					<a href="index.html#top">
+					<a href="index.php#top">
 						<img src="assets/images/seal-of-santa-rosa-laguna-2.png" alt="" style="height: 4.3rem;">
 					</a>
 				</span>
-				<span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-7" href="index.html#top">Sta.Rosa | E-JobConnect</a></span>
+				<span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-7" href="index.php#top">Sta.Rosa | E-JobConnect</a></span>
 			</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<div class="hamburger">
@@ -51,7 +51,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="index.html">POST A JOB</a> <a class="btn btn-primary display-7" href="index.html">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="employer/">POST A JOB</a> <a class="btn btn-primary display-7" href="find_a_job.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
 			</div>
 		</div>
 	</nav>
@@ -66,7 +66,7 @@
 		<div class="row content-wrapper justify-content-center">
 			<div class="col-lg-7 mbr-form">
 				<div class="text-wrapper align-left" data-form-type="formoid">
-					<form  method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="OVt97Ziyb5MTDLxj54McNRsMaWSCvXjP9eGdcE8cQdjNYoo8rve7tH8j1voac19jKkekqKgfQgMKD/Mr206khvf0577aH4BboVBEBid77OvwkU13A7tFtB12GjTAR/bq">
+					<form  action="find_a_job.php" >
 						<div class="dragArea row">
 							<div class="col-lg-12 col-md-12 col-sm-12">
 								<h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong style="font-size: 4rem;">The Job Hunting in Sta.rosa Laguna</strong></h1>
@@ -76,22 +76,16 @@
 									Santa Rosa, Laguna is a vibrant city known for its rapid development, diverse economy, and status as a key transportation hub.</p>
 							</div>
 							<div data-for="email" class="col-lg-6 col-md-6 col-sm-12">
-								<input type="email" name="email" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
+								<input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
 							</div>
 							<div class="col-auto mbr-section-btn"><button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button></div>
-							<div class="row">
-								<div hidden="hidden" data-form-alert="" class="alert alert-success col-12"></div>
-								<div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-									Oops...! some problem!
-								</div>
-							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="col-lg-5 col-12">
 				<div class="image-wrapper">
-					<img class="w-100" src="assets/images/1200px-ph-fil-santa-rosa-laguna.png" alt="Mobirise Website Builder">
+					<img class="w-100" src="assets/images/1200px-ph-fil-santa-rosa-laguna.png" alt="">
 				</div>
 			</div>
 		</div>
@@ -369,27 +363,27 @@
 				</ul>
 			</div>
 			<div class="col-12 mt-5 footer-col">
-				<div class="mbr-section-btn align-left"><a class="btn btn-primary display-7" href="index.html">FIND JOBS</a>
-					<a class="btn btn-secondary display-7" href="index.html">POST A JOB</a></div>
+				<div class="mbr-section-btn align-left"><a class="btn btn-primary display-7" href="index.php">FIND JOBS</a>
+					<a class="btn btn-secondary display-7" href="index.php">POST A JOB</a></div>
 
 				<div class="social-row mt-2 display-7">
 					<div class="soc-item">
-						<a href="index.html">
+						<a href="index.php">
 							<span class="mbr-iconfont socicon-facebook socicon"></span>
 						</a>
 					</div>
 					<div class="soc-item">
-						<a href="index.html">
+						<a href="index.php">
 							<span class="mbr-iconfont socicon-twitter socicon"></span>
 						</a>
 					</div>
 					<div class="soc-item">
-						<a href="index.html">
+						<a href="index.php">
 							<span class="mbr-iconfont socicon-instagram socicon"></span>
 						</a>
 					</div>
 					<div class="soc-item">
-						<a href="index.html">
+						<a href="index.php">
 							<span class="mbr-iconfont socicon-logmein socicon"></span>
 						</a>
 					</div>
@@ -398,7 +392,7 @@
 			
 		</div>
 	</div>
-</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: absolute;height: 4rem;margin-left:-300px;margin-top: -65px;"><a href="https://mobiri.se/29566" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/builder/ai-website-generator.html">AI Website Generator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/scrollgallery/scroll-gallery.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
+</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: absolute;height: 4rem;margin-left:-300px;margin-top: -65px;"><a href="https://mobiri.se/29566" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/builder/ai-website-generator.php">AI Website Generator</a></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/scrollgallery/scroll-gallery.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
   
   
 </body>
