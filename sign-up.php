@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
 include'connect/connect.php';
 
 	if(isset($_SESSION['id'])){
@@ -54,11 +55,63 @@ include'connect/connect.php';
 				}
 			} 
 			else {
-				$sql = "INSERT INTO $role (firstname, lastname, email, password, type) 
-				        VALUES ('$fname', '$lname', '$email', '$pass', '$role')";
+				$sql = "INSERT INTO $role (firstname, lastname, email, password, type, status) 
+				        VALUES ('$fname', '$lname', '$email', '$pass', '$role', 'pending')";
 				$conn->query($sql);
 
 				echo "Welcome, $fname $lname!";
+
+
+
+				// Email starts here
+				$mail = new PHPMailer\PHPMailer\PHPMailer();
+
+				try {
+					$token = bin2hex(random_bytes(16));
+					$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
+					$conn->query("UPDATE $role SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
+
+				    $link_verification = "https://e-jobconnect.ceitesystems.com/index.php?token=$token&type=$role";
+
+				    $mail->isSMTP();
+				    $mail->Host = 'smtp.gmail.com';
+				    $mail->SMTPAuth = true;
+				    $mail->Username = 'martylex7@gmail.com';
+				    $mail->Password = 'zvbx sict ephh ooxp';
+				    $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+				    $mail->Port = 587;
+
+				    $mail->setFrom($email, 'Sta. Rosa | E-JobConnect');
+				    $mail->addAddress($email, 'Recipient Name');
+
+				    $mail->isHTML(true);
+				    $mail->Subject = 'Verify Your Account - Sta. Rosa | E-JobConnect';
+				    $mail->Body    = "Dear $fname $lname,<br>
+				            <br>
+				            Thank you for registering with us.<br>
+				            <br>
+				            To complete your registration and activate your account. Please verify your email by clicking the link below:
+				            <br>
+				            <p><a href='$link_verification'>Verify your account</a></p><br>
+				            <br>
+				            The link will expire in one hour.<br>
+				            <br>
+				            If you did not create this account, you can safely ignore this message.<br>
+				            <br>
+				            Thank you for being a part of Sta. Rosa | E-JobConnect — where we connect you to job opportunities in and around Santa Rosa, Laguna.<br>";
+
+				    if ($mail->send()) {
+				        echo 'Message has been sent';
+				    } else {
+				        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+				    }
+				} catch (Exception $e) {
+				    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+				}
+				// Email ends here
+
+
+
 			}
 		}
 		catch (Exception $e) {

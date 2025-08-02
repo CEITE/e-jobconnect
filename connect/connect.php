@@ -6,10 +6,10 @@ $password = "";
 $dbname = "ejobconnect";
 
 
-/*$servername = "localhost";
+$servername = "localhost";
 $username = "u765170597_ejobconnect";
 $password = "hU7A:/*3J";
-$dbname = "u765170597_ejobconnect";*/
+$dbname = "u765170597_ejobconnect";
 
 //Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

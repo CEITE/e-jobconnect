@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <?php
 session_start();
 require 'vendor/autoload.php';
@@ -12,10 +14,6 @@ include'connect/connect.php';
 	if (isset($_POST['email'])) {
         $email = $_POST['email'];
         $pass = 'zvbx sict ephh ooxp';
-		$result = $conn->query("SELECT id FROM users WHERE email='$email'");
-
-
-
 
 		try {
 		// Check if the email is already exist
@@ -54,7 +52,7 @@ include'connect/connect.php';
 				$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 				
 				$conn->query("UPDATE $type SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
-				$resetLink = "https://e-jobconnect.ceitesystems.com//forgot-verified.php?type=$type&token=$token";
+				$resetLink = "https://e-jobconnect.ceitesystems.com/forgot-verified.php?type=$type&token=$token";
 				
 
 				$mail = new PHPMailer\PHPMailer\PHPMailer();
@@ -90,11 +88,19 @@ include'connect/connect.php';
 				}
 				
 			} else {
-				echo "No account found with that email.";
+				echo "Swal.fire({
+					  title: 'Email doesn't exist,
+					  text: 'No account found with that email',
+					  icon: 'error'
+					});";
 			}
 		}
 		catch (Exception $e) {
-			echo "No account found with that email.";
+			echo "Swal.fire({
+				  title: 'Email doesn't exist,
+				  text: 'No account found with that email',
+				  icon: 'error'
+				});</script>";
 		}
 
 	}

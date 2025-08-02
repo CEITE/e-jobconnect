@@ -1,3 +1,32 @@
+<?php
+session_start();
+include'connect/connect.php';
+
+    if(isset($_SESSION['id'])){
+        $type=$_SESSION['type'];
+        header("location: ../".$type."/");
+    }
+
+    sleep(1);
+    if (isset($_GET['token']) && isset($_GET['type'])) {
+            $token = $_GET['token'];
+            $type = $_GET['type'];
+
+            $result = $conn->query("SELECT * FROM $type WHERE reset_token='$token' AND token_expiry > NOW()");
+            
+            if ($result->num_rows > 0) {
+                $user = $result->fetch_assoc();
+
+                $conn->query("UPDATE $type SET status='approved', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
+
+                echo "Your account is successfully verified.";
+            } else {
+                echo "Invalid or expired token.";
+            }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html  >
 <head>
