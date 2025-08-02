@@ -88,19 +88,11 @@ include'connect/connect.php';
 				}
 				
 			} else {
-				echo "Swal.fire({
-					  title: 'Email doesn't exist,
-					  text: 'No account found with that email',
-					  icon: 'error'
-					});";
+				echo "Email doesn't exist";
 			}
 		}
 		catch (Exception $e) {
-			echo "Swal.fire({
-				  title: 'Email doesn't exist,
-				  text: 'No account found with that email',
-				  icon: 'error'
-				});</script>";
+			echo "Email doesn't exist";
 		}
 
 	}
