@@ -113,7 +113,7 @@ include'connect/connect.php';
                                                 <div class="card-header " style="background: none;">
 
                                                     <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
-                                                    <h1><?php echo$title?></h1>
+                                                    <!-- <h1><?php echo$title?></h1> -->
                                                 </div>
                                                 <div class="card-body">
                                                     <?php echo $description?>
