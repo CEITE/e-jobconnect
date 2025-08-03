@@ -167,7 +167,7 @@ include'connect/connect.php';
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 										<!--end::Indicator progress-->
 									</button>
-									<a href="authentication/layouts/corporate/sign-in.html" class="btn btn-light">Cancel</a>
+									<a href="./login.php" class="btn btn-light">Cancel</a>
 								</div>
 								<!--end::Actions-->
 							</form>
