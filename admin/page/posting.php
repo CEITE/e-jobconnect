@@ -256,7 +256,7 @@
                     <td><span class="badge badge-light-<?php echo$colors?>"><?php echo$status?></span></td>
                     <td>
                         <input type="hidden" id="description_<?php echo$id?>" value='<?php echo$description?>'>
-                        <a class="btn btn-light-primary btn-sm" href="?page=application&applicant=<?php echo$id?>" ><i class="bi bi-people"></i> Applicant <span class="badge badge-primary">0</span></a>
+                        <!-- <a class="btn btn-light-primary btn-sm" href="?page=application&applicant=<?php echo$id?>" ><i class="bi bi-people"></i> Applicant <span class="badge badge-primary">0</span></a> -->
                         <a class="btn btn-light-info btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2" onclick="form_data('<?php echo$id?>','<?php echo$title?>','<?php echo$tagify?>')" ><i class="bi bi-eye"></i> View</a>
                         <?php
                             if($status=="pending"){
