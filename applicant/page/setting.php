@@ -133,19 +133,6 @@
 		</div>
 	</div>
 	<div class="separator separator-content my-14">
-		<span class="w-125px text-gray-500 fw-semibold fs-7">Curriculum vitae</span>
-	</div>
-	<div class="card">
-		<div class="card-header">
-			<h2>Upload</h2>
-		</div>
-		<div class="card-body">
-			<form>
-
-			</form>
-		</div>
-	</div>
-	<div class="separator separator-content my-14">
 		<span class="w-125px text-gray-500 fw-semibold fs-7">Credentials</span>
 	</div>
 	<div class="card">
@@ -195,3 +182,4 @@
 		</div>
 	</div>
 </div>
+w

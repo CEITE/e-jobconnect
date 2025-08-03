@@ -4,7 +4,7 @@ include'connect/connect.php';
 
 	if(isset($_SESSION['id'])){
 		$type=$_SESSION['type'];
-		header("location: ../".$type."/");
+		header("location: ./".$type."/");
 	}
 ?>
 <!DOCTYPE html>
