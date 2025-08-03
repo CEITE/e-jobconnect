@@ -1,9 +1,8 @@
 <?php
-    $table="admin";
+    $table="posting";
     $error=0;
 
-
-    if(isset($_POST['update_info'])){
+    if(isset($_POST['add'])){
         extract($_POST);
             $data="";
 
@@ -12,7 +11,77 @@
                 if(empty($data)){
                     $data .= " $k='$v' ";
                 }else{
-                    if($k=="update_info"){
+                    if($k=="add"){
+                        $data .= "";
+                    }else if($k=="tagify"){
+
+
+                        $jsonString = $v;
+
+                        // Decode the JSON string into a PHP array of objects
+                        $datas = json_decode($jsonString);
+                        $datass="";
+
+                        foreach ($datas as $item) {
+                             $datass.=$item->value . ",";
+                        }
+
+                        $data .= ", $k='$datass'";
+
+                    }else{
+                        $data .= ", $k='$v' ";
+                    }
+                    
+                }
+            }
+
+            
+
+            $data;
+            $data.=", status='pending'";
+            // $data.=", password='4052e09931ceddc2963e2524ee2a2bc7'";
+            $data.=", date_created=NOW()";
+
+
+
+            // $data.=", admin_id='$user_id'";
+           $sql="INSERT INTO $table SET $data";
+
+           if ($conn->query($sql) === TRUE) {
+             $last_id = $conn->insert_id;
+
+              $error="add";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+    }
+
+    if(isset($_POST['save'])){
+        extract($_POST);
+            $data="";
+
+            foreach ($_POST as $k => $v){
+
+                if(empty($data)){
+                    $data .= " $k='$v' ";
+                    }else if($k=="tagify"){
+
+
+                        $jsonString = $v;
+
+                        // Decode the JSON string into a PHP array of objects
+                        $datas = json_decode($jsonString);
+                        $datass="";
+
+                        foreach ($datas as $item) {
+                             $datass.=$item->value . ",";
+                        }
+
+                        $data .= ", $k='$datass'";
+
+                    }else{
+                    if($k=="save"){
                         $data .= "";
                     }else{
                         $data .= ", $k='$v' ";
@@ -21,159 +90,380 @@
                 }
             }
 
+            
+
             $data;
 
-            // $data.=", date_created=NOW()";
-
-
-            // $data.=", admin_id='$user_id'";
            $sql="UPDATE $table SET $data WHERE id='$id'";
 
            if ($conn->query($sql) === TRUE) {
              //$last_id = $conn->insert_id;
 
 
-                $error="save_info";
+                $error="save";
             } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
             }
     }
 
-    if(isset($_POST['update_password'])){
-        extract($_POST);
-            $data="";
+    if(isset($_GET['approved'])){
+        extract($_GET);
+            $id=$approved;
 
-            // foreach ($_POST as $k => $v){
+            $sql="UPDATE $table SET status='approved' WHERE id='$id'";
 
-            //     if(empty($data)){
-            //         $data .= " $k='$v' ";
-            //     }else{
-            //         if($k=="update_password"){
-            //             $data .= "";
-            //         }else{
-            //             $data .= ", $k='$v' ";
-            //         }
-                    
-            //     }
-            // }
-
-            $data="id='$id'";
-
-            $old_password=md5($old_password);
-
-            if($old_password==$password){
-
-                if($new_password==$confirm_password){
-
-                    $new_password=md5($new_password);
-
-                    $data.=", password='$new_password'";
-
-                    $sql="UPDATE $table SET $data WHERE id='$id'";
-
-                   if ($conn->query($sql) === TRUE) {
-                     //$last_id = $conn->insert_id;
+           if ($conn->query($sql) === TRUE) {
+             //$last_id = $conn->insert_id;
 
 
-                        $error="save_password";
-                    } else {
-                      echo "Error: " . $sql . "<br>" . $conn->error;
-                    }
-
-
-                }else{
-                    $error="retype_password";
-
-
-                }
-            }else{
-                $error="wrong_password";
+                $error="save";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
             }
 
-            
     }
+    
+    if(isset($_GET['remove'])){
+        extract($_GET);
+            $data="";
+
+            $sql="DELETE FROM $table WHERE id='$id'";
+
+           if ($conn->query($sql) === TRUE) {
+             //$last_id = $conn->insert_id;
+
+
+                $error="delete";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+    }
+
 ?>
-
-<div class="container p-5">
-    <div class="separator separator-content my-14">
-        <span class="w-125px text-gray-500 fw-semibold fs-7">Personal Information</span>
-
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h2>Basic Information</h2>
-        </div>
-        <div class="card-body">
-            <?php
-                if($error=="save_info"){
-                    ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Success!</strong> Information Update Successfully
-                    </div>
-                    <?php
-                }
+<?php
+        if($error == "add"){
             ?>
-            <form method="POST">
-                <div class="row input-group input-group-md">
-                    <input type="hidden" name="id" value="<?php echo$id?>">
-                    <input type="text" class="col-md-6 pt-2 mt-5 me-2 form-control" name="firstname" value="<?php echo$firstname?>" placeholder="Firstname">
-                    <input type="text" class="col-md-6 pt-2 mt-5 me-2 form-control" name="lastname" value="<?php echo$lastname?>"  placeholder="Lastname">
-                </div>
+                <!--begin::Alert-->
+                <div class="alert alert-success d-flex align-items-center p-5">
+                    <!--begin::Icon-->
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
+                    <!--end::Icon-->
 
-                <div class="row input-group input-group-md">
-                    <input type="text" class="col-md-6 pt-2 mt-5 me-2 form-control"  name="email" value="<?php echo$email?>"   placeholder="Email">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Title-->
+                        <h4 class="mb-1 text-success">This is an alert</h4>
+                        <!--end::Title-->
+
+                        <!--begin::Content-->
+                        <span>New data add successfully</span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
                 </div>
-                <button class="btn btn-light-primary mt-5" name="update_info">Update</button>
-            </form>
-        </div>
-    </div>
-    <div class="separator separator-content my-14">
-        <span class="w-125px text-gray-500 fw-semibold fs-7">Credentials</span>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h2>Set New Password</h2>
-        </div>
-        <div class="card-body">
+                <!--end::Alert-->
             <?php
-                if($error=="wrong_password"){
-                    ?>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Error!</strong> Wrong Password
-                    </div>
-                    <?php
-                } else if($error=="retype_password"){
-                    ?>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Error!</strong> Please Retype Password
-                    </div>
-                    <?php
-                }else if($error=="save_password"){
-                    ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Success!</strong> Password change Successfully
-                    </div>
-                    <?php
-                }
+        }else if($error == "save"){
             ?>
-            <form method="POST">
-                <input type="hidden" name="id" value="<?php echo$id?>">
-                <div class="row input-group input-group-md">
-                    <input type="password" class="col-md-4 pt-2 mt-5 me-2 form-control" name="old_password"  placeholder="Old Password">
+                <!--begin::Alert-->
+                <div class="alert alert-success d-flex align-items-center p-5">
+                    <!--begin::Icon-->
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
+                    <!--end::Icon-->
+
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Title-->
+                        <h4 class="mb-1 text-success">This is an alert</h4>
+                        <!--end::Title-->
+
+                        <!--begin::Content-->
+                        <span>Save successfully</span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
                 </div>
-                <div class="row input-group input-group-md">
-                    <input type="password" class="col-md-4 pt-2 mt-5 me-2 form-control" name="new_password" placeholder="New Password">
+                <!--end::Alert-->
+            <?php
+        
+        }else if($error == "delete"){
+            ?>
+                <!--begin::Alert-->
+                <div class="alert alert-danger d-flex align-items-center p-5">
+                    <!--begin::Icon-->
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>
+                    <!--end::Icon-->
+
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Title-->
+                        <h4 class="mb-1 text-danger">This is an alert</h4>
+                        <!--end::Title-->
+
+                        <!--begin::Content-->
+                        <span>Deleted successfully</span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Alert-->
+            <?php
+        
+        }else{
+
+        }
+?>
+<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Add New</button>
+<table id="kt_datatable_dom_positioning" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
+    <thead>
+        <tr class="fw-bold fs-6 text-gray-800 px-7">
+            <th>Employer</th>
+            <th>Title</th>
+            <th>Date Created</th>
+            <th>Skill requirements</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            $sql = "SELECT t.*,
+            (SELECT firstname FROM employer WHERE id=t.employer_id) AS firstname,
+            (SELECT lastname FROM employer WHERE id=t.employer_id) AS lastname
+             FROM $table t WHERE employer_id='$user_id' ";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                extract($row);
+
+                if($status=="pending"){
+                    $colors="warning";
+                }else if($status=="approved"){
+                    $colors="success";
+                }else{
+                    $colors="danger";
+                }
+
+                ?>
+                <tr>
+                    <td><?php echo$firstname?> <?php echo$lastname?></td>
+                    <td><?php echo$title?></td>
+                    <td><?php echo$date_created?></td> 
+                    <td><input class="form-control disable" disabled="" value="<?php echo$tagify?>" tagifies=''> </td>
+                    <td><span class="badge badge-light-<?php echo$colors?>"><?php echo$status?></span></td>
+                    <td>
+                        <input type="hidden" id="description_<?php echo$id?>" value='<?php echo$description?>'>
+                        <!-- <a class="btn btn-light-primary btn-sm" href="?page=application&applicant=<?php echo$id?>" ><i class="bi bi-people"></i> Applicant <span class="badge badge-primary">0</span></a> -->
+                        <a class="btn btn-light-info btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2" onclick="form_data('<?php echo$id?>','<?php echo$title?>','<?php echo$tagify?>')" ><i class="bi bi-eye"></i> View</a>
+                        <?php
+                            if($status=="pending"){
+                                ?>
+                                <!-- <a class="btn btn-light-success btn-sm" href="?page=<?php echo$page?>&approved=<?php echo$id?>" ><i class="bi bi-check"></i> Approved</a> -->
+                                <?php
+                            }
+                        ?>
+                        <a class="btn btn-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
+                    </td>
+                </tr>
+                
+                <?php
+              }
+            }
+        ?>
+    </tbody>
+</table>
+
+
+
+<script type="text/javascript">
+    function table(){
+        $("#kt_datatable_dom_positioning").DataTable({
+            "language": {
+                "lengthMenu": "Show _MENU_",
+            },
+            "dom":
+                "<'row mb-2'" +
+                "<'col-sm-6 d-flex align-items-center justify-conten-start dt-toolbar'l>" +
+                "<'col-sm-6 d-flex align-items-center justify-content-end dt-toolbar'f>" +
+                ">" +
+
+                "<'table-responsive'tr>" +
+
+                "<'row'" +
+                "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                ">"
+        });
+    }
+
+    setTimeout(function() {
+        table();
+        $('#myModal').modal('show');
+
+        var input1 = document.querySelector("#kt_tagify_1");
+        new Tagify(input1);
+
+       
+
+        var options = {selector: "#kt_docs_tinymce_basic", height : "480"};
+
+        if ( KTThemeMode.getMode() === "dark" ) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
+
+        var options = {selector: "#kt_docs_tinymce_basics", height : "480"};
+
+        if ( KTThemeMode.getMode() === "dark" ) {
+            options["skin"] = "oxide-dark";
+            options["content_css"] = "dark";
+        }
+
+        tinymce.init(options);
+
+
+
+        var input2 = document.querySelector("[tagifies='']");
+        new Tagify(input2);
+
+         
+
+    }, 1000);
+
+    function tagifiess(){
+        var input3 = document.querySelector("#kt_tagify_3");
+        new Tagify(input3);
+    }
+</script>
+
+<div class="modal fade" tabindex="-1" id="kt_modal_1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+                <!--end::Close-->
+            </div>
+
+           <form method="POST">
+                <div class="modal-body">
+                    <input class="form-control" type="" name="title" placeholder="Title"><br>
+                    <input type="hidden" name="employer_id" value="<?php echo$user_id?>">
+                    <textarea id="kt_docs_tinymce_basic" name="description" class="tox-target" placeholder="Tell something you looking for"></textarea><br>
+                    <div class="mb-10">
+                            <label class="form-label">Skill Requirements </label>
+                            <input class="form-control" name="tagify" value="" id="kt_tagify_1"/>
+                        </div>
                 </div>
 
-                <div class="row input-group input-group-md">
-                    <input type="password" class="col-md-4 pt-2 mt-5 me-2 form-control" name="confirm_password"  placeholder="Re-enter New Password">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="add">Add</button>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function form_data(id,title,tagifys){
+        document.edit_form.id.value=id;
+        document.edit_form.title.value=title;
+        // document.edit_form.description.innerHTML=description;
+        document.edit_form.tagify.value=tagifys;
+
+        var description="description_"+id;
+
+        
+
+        // Get the editor instance by its ID
+        var editor = tinymce.get('kt_docs_tinymce_basics');
+
+        // Set the content
+        if (editor) {
+          editor.setContent(document.getElementById(description).value);
+        }
+        tagifiess();
+
+
+        
+
+    }
+</script>
+<div class="modal fade" tabindex="-1" id="kt_modal_2">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+                <!--end::Close-->
+            </div>
+
+           <form method="POST" name="edit_form">
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <input class="form-control" type="" name="title" placeholder="Title"><br>
+                    <input type="hidden" name="employer_id" value="<?php echo$user_id?>">
+                    <textarea id="kt_docs_tinymce_basics" name="description" class="tox-target" placeholder="Tell something you looking for"></textarea><br>
+                    <div class="mb-10">
+                        <label class="form-label">Skill Requirements </label>
+                        <input class="form-control" name="tagify" value="" id="kt_tagify_3"/>
+                    </div>
                 </div>
 
-                <button class="btn btn-light-primary mt-5" name="update_password">Update</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="save">Save</button>
+                </div>
+           </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function deletes(id){
+        var form=document.delete;
+        form.id.value=id;
+    }
+</script>
+<div class="modal fade" tabindex="-1" id="kt_modal_3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"></h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <form method="GET" name="delete" >
+                <div class="modal-body">
+                    <input type="hidden" name="page" value="<?php echo$page?>">
+                    <input class="" type="hidden" name="id"><br>
+                    <input type="hidden" name="action" value="delete">
+                    <center><label class="h1">Are you sure want to delete?</label></center>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" name="remove">Yes</button>
+                </div>
             </form>
         </div>
     </div>

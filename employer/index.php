@@ -17,7 +17,8 @@ session_start();
 
 	$sql = "SELECT u.*,
 	(SELECT COUNT(id) FROM applicant) AS applicant,
-	(SELECT COUNT(id) FROM employer) AS employer
+	(SELECT COUNT(id) FROM employer) AS employer,
+	(SELECT COUNT(id) FROM posting) AS posting
 	 FROM employer u WHERE id='$id'";
 	$result = $conn->query($sql);
 
