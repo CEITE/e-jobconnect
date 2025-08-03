@@ -96,7 +96,7 @@ include'connect/connect.php';
 
                                 $search=$_GET['search'];
 
-                                $sql = "SELECT * FROM posting WHERE tagify LIKE '%".$search."%'  ORDER BY id DESC";
+                                $sql = "SELECT * FROM posting WHERE tagify LIKE '%".$search."%' OR title LIKE '%".$search."%' ORDER BY id DESC";
                             }else{
                                 $sql = "SELECT * FROM posting WHERE status='approved' ORDER BY id DESC";
                             }
@@ -115,7 +115,7 @@ include'connect/connect.php';
                                                     <label style="float: right;">Posted: <i><?php echo$date_created?></i></label>
                                                     <!-- <h1><?php echo$title?></h1> -->
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" style="">
                                                     <?php echo $description?>
                                                 </div>
                                                 <div class="card-footer" style="background: none;">
