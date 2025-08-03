@@ -1,5 +1,5 @@
 <?php
- 	$table="admin";
+ 	$table="applicant";
     $error=0;
 
 
@@ -129,6 +129,19 @@
 					<textarea type="text" class="col-md-6 pt-2 mt-5 me-2 form-control" name="address"  placeholder="Please fill up address"><?php echo$address?></textarea>
 				</div>
 				<button class="btn btn-light-primary mt-5" name="update_info">Update</button>
+			</form>
+		</div>
+	</div>
+	<div class="separator separator-content my-14">
+		<span class="w-125px text-gray-500 fw-semibold fs-7">Curriculum vitae</span>
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<h2>Upload</h2>
+		</div>
+		<div class="card-body">
+			<form>
+
 			</form>
 		</div>
 	</div>

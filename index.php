@@ -4,7 +4,11 @@ include'connect/connect.php';
 
     if(isset($_SESSION['id'])){
         $type=$_SESSION['type'];
-        header("location: ../".$type."/");
+        
+
+        if($type!=="applicant"){
+            header("location: ../".$type."/");
+        }
     }
 
     sleep(1);
@@ -19,9 +23,9 @@ include'connect/connect.php';
 
                 $conn->query("UPDATE $type SET status='approved', reset_token=NULL, token_expiry=NULL WHERE id='{$user['id']}'");
 
-                echo "Your account is successfully verified.";
+                //echo "Your account is successfully verified.";
             } else {
-                echo "Invalid or expired token.";
+                //echo "Invalid or expired token.";
             }
     }
 ?>

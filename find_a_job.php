@@ -1,7 +1,15 @@
 <?php
-
+session_start();
 include'connect/connect.php';
 
+    if(isset($_SESSION['id'])){
+        $type=$_SESSION['type'];
+        
+
+        if($type!=="applicant"){
+            header("location: ../".$type."/");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html  >

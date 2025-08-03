@@ -47,7 +47,7 @@
 			    }else{
 			    	if($passwords==$password){
 				    	$_SESSION['id']=$id;
-				    	//$_SESSION['type']=$type;
+				    	$_SESSION['type']=$type;
 				    		
 
 				    		$sql = "UPDATE $type SET attemp='0' WHERE email='$email'";

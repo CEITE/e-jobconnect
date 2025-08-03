@@ -7,7 +7,7 @@ include'connect/connect.php';
 		$type=$_SESSION['type'];
 		header("location: ../".$type."/");
 	}
-
+	$error="";
 
 	if (isset($_POST['submit'])) {
 		$fname = $_POST['fname'];
@@ -51,7 +51,7 @@ include'connect/connect.php';
 
 			if ($type != null) {
 				if ($result->num_rows > 0) {
-					echo "Account already exists";
+					$error="exist";
 				}
 			} 
 			else {
@@ -59,7 +59,7 @@ include'connect/connect.php';
 				        VALUES ('$fname', '$lname', '$email', '$pass', '$role', 'pending')";
 				$conn->query($sql);
 
-				echo "Welcome, $fname $lname!";
+				//echo "Welcome, $fname $lname!";
 
 
 
@@ -71,7 +71,7 @@ include'connect/connect.php';
 					$expiry = date("Y-m-d H:i:s", strtotime("+1 hour"));
 					$conn->query("UPDATE $role SET reset_token='$token', token_expiry='$expiry' WHERE email='$email'");
 
-				    $link_verification = "localhost/e-jobconnect/index.php?token=$token&type=$role";
+				    $link_verification = "https://e-jobconnect.ceitesystems.com/index.php?token=$token&type=$role";
 
 				    $mail->isSMTP();
 				    $mail->Host = 'smtp.gmail.com';
@@ -92,7 +92,7 @@ include'connect/connect.php';
 				            <br>
 				            To complete your registration and activate your account. Please verify your email by clicking the link below:
 				            <br>
-				            <p><a href='$link_verification'>Verify your account</a></p><br>
+				            <p><a href='".$link_verification."'>".$link_verification."</a></p><br>
 				            <br>
 				            The link will expire in one hour.<br>
 				            <br>
@@ -101,7 +101,9 @@ include'connect/connect.php';
 				            Thank you for being a part of Sta. Rosa | E-JobConnect — where we connect you to job opportunities in and around Santa Rosa, Laguna.<br>";
 
 				    if ($mail->send()) {
-				        echo 'Message has been sent';
+				        //echo 'Message has been sent';
+
+				        $error="check";
 				    } else {
 				        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
 				    }
@@ -178,12 +180,20 @@ include'connect/connect.php';
 								</div>
 								<!--end::Separator-->
 								<?php
-									if(isset($_GET['error'])){
-										$error=$_GET['error'];
+									if($error=="check"){
+										
+										?>
+										<div class="alert alert-success alert-dismissible">
+										  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+										  <strong>Success!</strong> Please view your email and verify it.
+										</div>
+										<?php
+									}else if($error=="exist"){
+										
 										?>
 										<div class="alert alert-danger alert-dismissible">
 										  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-										  <strong>Error!</strong> <?php echo$error?>
+										  <strong>Error!</strong> Please use other email.
 										</div>
 										<?php
 									}

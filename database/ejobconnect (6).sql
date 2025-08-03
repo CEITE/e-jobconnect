@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2025 at 02:29 PM
+-- Generation Time: Aug 03, 2025 at 06:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,6 +57,8 @@ CREATE TABLE `applicant` (
   `firstname` varchar(500) NOT NULL,
   `lastname` varchar(500) NOT NULL,
   `email` varchar(500) NOT NULL,
+  `cp_number` varchar(500) NOT NULL,
+  `address` varchar(500) NOT NULL,
   `password` varchar(500) NOT NULL,
   `type` varchar(500) NOT NULL,
   `attemp` int(250) NOT NULL,
@@ -69,8 +71,8 @@ CREATE TABLE `applicant` (
 -- Dumping data for table `applicant`
 --
 
-INSERT INTO `applicant` (`id`, `firstname`, `lastname`, `email`, `password`, `type`, `attemp`, `reset_token`, `token_expiry`, `status`) VALUES
-(1, 'applicant', 'applicant', 'applicant@gmail.com', '4052e09931ceddc2963e2524ee2a2bc7', 'applicant', 0, '', '', 'approved');
+INSERT INTO `applicant` (`id`, `firstname`, `lastname`, `email`, `cp_number`, `address`, `password`, `type`, `attemp`, `reset_token`, `token_expiry`, `status`) VALUES
+(5, 'Alexanders', 'Avendano', 'a.avendano008@gmail.com', '09558456111', 'ph2 blk38 lot 31 Southville 4 Brgy. Pooc Sta.rosa Laguna', 'd0c7061e489f8f272328517d9c923729', 'applicant', 0, '87ca0a9213e4bc950ef2e6f351a017e3', '2025-08-03 12:27:10', 'approved');
 
 -- --------------------------------------------------------
 
@@ -80,8 +82,9 @@ INSERT INTO `applicant` (`id`, `firstname`, `lastname`, `email`, `password`, `ty
 
 CREATE TABLE `application` (
   `id` int(250) NOT NULL,
-  `applicant` varchar(500) NOT NULL,
+  `applicant_id` varchar(500) NOT NULL,
   `posting_id` varchar(500) NOT NULL,
+  `file_location` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL,
   `date_created` varchar(500) NOT NULL,
   `msg` varchar(500) NOT NULL
@@ -147,7 +150,10 @@ CREATE TABLE `posting` (
 --
 
 INSERT INTO `posting` (`id`, `employer_id`, `title`, `description`, `date_registered`, `date_created`, `status`, `tagify`) VALUES
-(13, '1', 'Web development', '<p><span style=\"font-size: 24pt;\"><strong>Looking For Web developer</strong></span></p>\n<p><span style=\"font-size: 12pt;\">knowledgeable in PHP,JS,worddpress</span></p>\n<p><span style=\"font-size: 12pt;\">25k starting salary</span></p>', '', '2025-08-01 19:14:17', 'approved', 'test,');
+(13, '1', 'I.T. Solutions', '<p><span style=\"font-size: 24pt;\"><strong><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJhl_DCV72DVplfwf5fRYBeuPDtajlZJnoQ&amp;s\" alt=\"SM City Santa Rosa added a new photo. - SM City Santa Rosa\" width=\"267\" height=\"267\"></strong></span></p>\n<p><span style=\"font-size: 24pt;\"><strong>Looking For Web developer</strong></span></p>\n<p><span style=\"font-size: 12pt;\">knowledgeable in PHP,JS,worddpress</span></p>\n<p><span style=\"font-size: 12pt;\">25k starting salary</span></p>', '', '2025-08-01 19:14:17', 'approved', 'test,'),
+(18, '1', 'I.T. Solutions', '<p><span style=\"font-size: 24pt;\"><strong><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJhl_DCV72DVplfwf5fRYBeuPDtajlZJnoQ&amp;s\" alt=\"SM City Santa Rosa added a new photo. - SM City Santa Rosa\" width=\"267\" height=\"267\"></strong></span></p>\r\n<p><span style=\"font-size: 24pt;\"><strong>Looking For Web developer</strong></span></p>\r\n<p><span style=\"font-size: 12pt;\">knowledgeable in PHP,JS,worddpress</span></p>\r\n<p><span style=\"font-size: 12pt;\">25k starting salary</span></p>', '', '2025-08-01 19:14:17', 'approved', 'test,'),
+(19, '1', 'I.T. Solutions', '<p><span style=\"font-size: 24pt;\"><strong><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJhl_DCV72DVplfwf5fRYBeuPDtajlZJnoQ&amp;s\" alt=\"SM City Santa Rosa added a new photo. - SM City Santa Rosa\" width=\"267\" height=\"267\"></strong></span></p>\r\n<p><span style=\"font-size: 24pt;\"><strong>Looking For Web developer</strong></span></p>\r\n<p><span style=\"font-size: 12pt;\">knowledgeable in PHP,JS,worddpress</span></p>\r\n<p><span style=\"font-size: 12pt;\">25k starting salary</span></p>', '', '2025-08-01 19:14:17', 'approved', 'test,'),
+(20, '1', 'I.T. Solutions', '<p><span style=\"font-size: 24pt;\"><strong><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJhl_DCV72DVplfwf5fRYBeuPDtajlZJnoQ&amp;s\" alt=\"SM City Santa Rosa added a new photo. - SM City Santa Rosa\" width=\"267\" height=\"267\"></strong></span></p>\r\n<p><span style=\"font-size: 24pt;\"><strong>Looking For Web developer</strong></span></p>\r\n<p><span style=\"font-size: 12pt;\">knowledgeable in PHP,JS,worddpress</span></p>\r\n<p><span style=\"font-size: 12pt;\">25k starting salary</span></p>', '', '2025-08-01 19:14:17', 'approved', 'test,');
 
 --
 -- Indexes for dumped tables
@@ -197,7 +203,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `applicant`
 --
 ALTER TABLE `applicant`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `application`
@@ -215,7 +221,7 @@ ALTER TABLE `employer`
 -- AUTO_INCREMENT for table `posting`
 --
 ALTER TABLE `posting`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

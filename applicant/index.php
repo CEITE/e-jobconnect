@@ -4,21 +4,14 @@ session_start();
 
 	if(!isset($_SESSION['id'])){
 		header("location: ../login.php");
-
-		
 	}else{
 		$id=$_SESSION['id'];
-		$type=$_SESSION['type'];
-
-		if($type!=="employer"){
-            header("location: ../".$type."/");
-        }
 	}
 
 	$sql = "SELECT u.*,
 	(SELECT COUNT(id) FROM applicant) AS applicant,
 	(SELECT COUNT(id) FROM employer) AS employer
-	 FROM employer u WHERE id='$id'";
+	 FROM applicant u WHERE id='$id'";
 	$result = $conn->query($sql);
 
 	$row = $result->fetch_assoc();
@@ -240,7 +233,7 @@ session_start();
 						<!--begin::Logo-->
 						<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 							<!--begin::Logo image-->
-							<a href="./">
+							<a href="../">
 								<img alt="Logo" src="../images/logo.png" class="h-55px app-sidebar-logo-default" />
 								<img alt="Logo" src="../images/logo.png" class="h-35px app-sidebar-logo-minimize" />
 								
