@@ -117,8 +117,6 @@ include'connect/connect.php';
                                                 </div>
                                                 <div class="card-body">
                                                     <?php echo $description?>
-
-                                                    
                                                 </div>
                                                 <div class="card-footer" style="background: none;">
                                                     <center>
