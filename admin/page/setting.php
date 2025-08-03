@@ -123,10 +123,6 @@
 
 				<div class="row input-group input-group-md">
 					<input type="text" class="col-md-6 pt-2 mt-5 me-2 form-control"  name="email" value="<?php echo$email?>"   placeholder="Email">
-					<input type="text" class="col-md-6 pt-2 mt-5 me-2 form-control"  name="cp_number" value="<?php echo$cp_number?>"  placeholder="Cellphone number">
-				</div>
-				<div class="row input-group input-group-md">
-					<textarea type="text" class="col-md-6 pt-2 mt-5 me-2 form-control" name="address"  placeholder="Please fill up address"><?php echo$address?></textarea>
 				</div>
 				<button class="btn btn-light-primary mt-5" name="update_info">Update</button>
 			</form>

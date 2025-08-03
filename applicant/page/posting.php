@@ -205,7 +205,6 @@
             <th>Company</th>
             <th>Date Created</th>
             <th>Skill requirements</th>
-            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -236,7 +235,6 @@
                     <td><?php echo$title?></td>
                     <td><?php echo$date_created?></td> 
                     <td><input class="form-control disable" disabled="" value="<?php echo$tagify?>" tagifies=''> </td>
-                    <td><span class="badge badge-light-<?php echo$colors?>"><?php echo$status?></span></td>
                     <td>
                         <input type="hidden" id="description_<?php echo$id?>" value='<?php echo$description?>'>
                         <a class="btn btn-light-primary btn-sm" href="?page=application&applicant=<?php echo$id?>" ><i class="bi bi-people"></i> Apply</a>

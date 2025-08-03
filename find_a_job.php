@@ -79,8 +79,8 @@ include'connect/connect.php';
 		<div class="row content-wrapper justify-content-center">
 			<div class="col-lg-12 mbr-form">
                 <div class="text-wrapper align-center" data-form-type="formoid">
-    				<form>
-                        <div class="row">
+    				<form >
+                        <div class="row" style="margin-top:100px;">
                             <div data-for="email" class="col-lg-9 col-md-9 col-sm-12">
                                 <input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
                             </div>
@@ -108,7 +108,7 @@ include'connect/connect.php';
                               while($row = $result->fetch_assoc()) {
                                 extract($row);
                                     ?>
-                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top:20px;">
                                             <div class="card bg-white">
                                                 <div class="card-header " style="background: none;">
 
@@ -123,9 +123,9 @@ include'connect/connect.php';
                                                 <div class="card-footer" style="background: none;">
                                                     <center>
                                                         <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn text-align-center">
-                                                            <button type="submit" class="w-100 btn btn-primary display-7">
+                                                            <a href="applicant/?page=application&applicant=<?php echo$id?>" type="submit" class="w-100 btn btn-primary display-7">
                                                                 <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>Apply Now
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                     </center>
                                                 </div>
