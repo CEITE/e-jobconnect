@@ -42,33 +42,34 @@ include'connect/connect.php';
 <body>
   
   <section data-bs-version="5.1" class="menu menu5 cid-uSlcbKVjXo" once="menu" id="menu05-0">
-	
+    
 
-	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-		<div class="container">
-			<div class="navbar-brand">
-				<span class="navbar-logo">
-					<a href="index.php#top">
-						<img src="assets/images/seal-of-santa-rosa-laguna-2.png" alt="" style="height: 4.3rem;">
-					</a>
-				</span>
-				<span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-7" href="index.php#top">Sta.Rosa | E-JobConnect</a></span>
-			</div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<div class="hamburger">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="employer/">POST A JOB</a> <a class="btn btn-primary display-7" href="index.php">FIND JOB</a> <a class="btn btn-primary-outline display-7" href="login.php">Login | Signup</a></div>
-			</div>
-		</div>
-	</nav>
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.html#top">
+                        <img src="assets/images/seal-of-santa-rosa-laguna-2.png" alt="" style="height: 4.3rem;">
+                    </a>
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-7" href="index.html#top">Sta.Rosa | E-JobConnect</a></span>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="./">POST A JOB</a> <a class="btn btn-primary display-7" href="find_a_job.php">FIND JOB</a> <a class="btn btn-success-outline display-7" href="login.php">Login | Signup</a></div>
+            </div>
+        </div>
+    </nav>
 </section>
+
 
 <section data-bs-version="5.1" class="header8 cid-uSlev0n3OC mbr-fullscreen" id="header08-1">
 	
@@ -85,7 +86,7 @@ include'connect/connect.php';
                                 <input type="" name="search" placeholder="Looking for something" data-form-field="email" class="form-control display-7" value="" id="email-header08-1">
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-12 mbr-section-btn">
-                                <button type="submit" class="w-100 btn btn-primary-outline display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button>
+                                <button type="submit" class="w-100 btn btn-secondary display-7"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Search</button>
                             </div>
                         </div>
                         <br>

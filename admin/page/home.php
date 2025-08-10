@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="col-md-12">
-		<div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end  mb-5 mb-xl-10 bg-primary" style="background-image:url('./assets/media/patterns/vector-1.png')">
+		<div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end  mb-5 mb-xl-10 bg-danger" style="background-image:url('./assets/media/patterns/vector-1.png')">
 		    <!--begin::Header-->
 		    <div class="card-header pt-5">
 		        <!--begin::Title-->
@@ -90,8 +90,8 @@
 		    datasets: [
 		        {
 		            label: "Post",
-		            backgroundColor: "lightblue",
-		            data: []
+		            backgroundColor: "red",
+		            data: [20]
 		        },
 		        // {
 		        //     label: "Time out",
