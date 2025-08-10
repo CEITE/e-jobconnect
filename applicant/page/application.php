@@ -41,29 +41,55 @@ $ids=$_GET['applicant'];
 			<input class="form-control" name="tagify" value="<?php echo$tagify?>"   id="kt_tagify_1" style="border: none !important;">
 		</div>
 		<div class="card-footer">
-			<!--begin::Form-->
-			<form class="form" action="#" method="post">
-			    <!--begin::Input group-->
-			    <div class="fv-row">
-			        <!--begin::Dropzone-->
-			        <div class="dropzone" id="kt_dropzonejs_example_1">
-			            <!--begin::Message-->
-			            <div class="dz-message needsclick">
-			                <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
 
-			                <!--begin::Info-->
-			                <div class="ms-4">
-			                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here or click to upload your CV here.</h3>
-			                    <span class="fs-7 fw-semibold text-gray-500">Upload  1 file</span>
-			                </div>
-			                <!--end::Info-->
-			            </div>
-			        </div>
-			        <!--end::Dropzone-->
-			    </div>
-			    <!--end::Input group-->
-			</form>
-			<!--end::Form-->
+			<?php
+
+
+				$sql = "SELECT * FROM application WHERE posting_id='$ids' AND applicant_id='$user_id'";
+				$result = $conn->query($sql);
+
+				if ($result->num_rows > 0) {
+				  // output data of each row
+				  while($row = $result->fetch_assoc()) {
+				    extract($row);
+				    if($status=='pending'){
+				    	?>
+				    	<!--begin::Alert-->
+		                <div class="alert alert-warning d-flex align-items-center p-5">
+		                    <!--begin::Icon-->
+		                    <i class="ki-duotone ki-shield-tick fs-2hx text-warning me-4"><span class="path1"></span><span class="path2"></span></i>
+		                    <!--end::Icon-->
+
+		                    <!--begin::Wrapper-->
+		                    <div class="d-flex flex-column">
+		                        <!--begin::Title-->
+		                        <h4 class="mb-1 text-warning">Pending</h4>
+		                        <!--end::Title-->
+
+		                        <!--begin::Content-->
+		                        <span>Your application is currently on pending</span>
+		                        <!--end::Content-->
+		                    </div>
+		                    <!--end::Wrapper-->
+		                </div>
+		                <!--end::Alert-->
+				    	<?php
+				    }
+				  }
+				} else {
+				  ?>
+				  	<!--begin::Form-->
+				<h1>Send Resume/CV</h1><br>
+				<form action="../upload.php" method="POST" enctype="multipart/form-data">
+				  Select file to upload:
+				  <input type="hidden" name="applicant_id" value="<?php echo$user_id?>">
+				  <input type="hidden" name="posting_id" value="<?php echo$id?>">
+				  <input type="file" name="fileToUpload" id="fileToUpload">
+				  <input type="submit" value="Upload Image" name="submit">
+				</form>
+				  <?php
+				}
+			?>
 			
 		</div>
 	</div>
@@ -77,20 +103,24 @@ $ids=$_GET['applicant'];
         var input1 = document.querySelector("#kt_tagify_1");
         new Tagify(input1);
 
-        var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
-		    url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-		    paramName: "file", // The name that will be used to transfer the file
-		    maxFiles: 10,
-		    maxFilesize: 10, // MB
-		    addRemoveLinks: true,
-		    accept: function(file, done) {
-		        if (file.name == "wow.jpg") {
-		            done("Naha, you don't.");
-		        } else {
-		            done();
-		        }
-		    }
-		});
+        // var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
+        	
+		//     url: "../upload.php", // Set the url for your upload script location
+		//     paramName: "file", // The name that will be used to transfer the file
+		//     maxFiles: 15,
+		//     // maxFilesize: 10, // MB
+		//     addRemoveLinks: true,
+		//     accept: function(file, done) {
+
+		//         if (file.name == "wow.jpg") {
+		//             done("Naha, you don't.");
+		//         } else {
+		//             done();
+		//         }
+
+		//         alert(done);
+		//     }
+		// });
          
     }, 1000);
 </script>

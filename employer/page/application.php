@@ -1,6 +1,7 @@
 <?php
-    $table="applicant";
+    $table="application";
     $error=0;
+    $posting_id=$_GET['applicant'];
 
     if(isset($_POST['add'])){
         extract($_POST);
@@ -101,6 +102,22 @@
 
     }
 
+    if(isset($_GET['action'])){
+        extract($_GET);
+        $data="status='approved'";
+
+           $sql="UPDATE $table SET $data WHERE id='$id'";
+
+           if ($conn->query($sql) === TRUE) {
+             //$last_id = $conn->insert_id;
+
+
+                $error="save";
+            } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+    }
+
 ?>
 <?php
         if($error == "add"){
@@ -180,27 +197,49 @@
     <thead>
         <tr class="fw-bold fs-6 text-gray-800 px-7">
             <th>Fullname</th>
-            <th>Email</th>
+            <th>Resume</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
-            $sql = "SELECT * FROM $table";
+            $sql = "SELECT t.*,
+            (SELECT firstname FROM applicant WHERE id=t.applicant_id) AS firstname,
+            (SELECT lastname FROM applicant WHERE id=t.applicant_id) AS lastname
+             FROM $table t WHERE posting_id ='$posting_id'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
               // output data of each row
               while($row = $result->fetch_assoc()) {
                 extract($row);
+
+                if($status=="pending"){
+                    $colors="warning";
+                }else if($status=="approved"){
+                    $colors="success";
+                }else{
+                    $colors="danger";
+                }
                 ?>
                 <tr>
                     <td><?php echo$firstname?> <?php echo$lastname?></td>
-                    <td><?php echo$email?></td>
-                    <td><span class="badge badge-light-success"><?php echo$status?></td>
+                    <td><a href="../uploads/<?php echo$file_location?>"><?php echo$file_location?></a></td>
+                    <td><span class="badge badge-light-<?php echo$colors?>"><?php echo$status?></td>
                     <td>
                         <a class="btn btn-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_3" onclick="deletes('<?php echo$id?>')"><i class="bi bi-trash"></i> Remove</a>
+                        <?php
+                            if($status=="approved"){
+                                ?>
+                                    <a class="btn btn-light-primary btn-sm" href="?page=inquiries&applicant=<?php echo$applicant_id?>"><i class="bi bi-send"></i> Message</a>
+                                <?php
+                            }else{
+                                ?>
+                                    <a class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_4" onclick="approved('<?php echo$id?>')"><i class="bi bi-check"></i> Approved</a>
+                                <?php
+                            }
+                        ?>
                     </td>
                 </tr>
                 <?php
@@ -339,6 +378,8 @@
                 <div class="modal-body">
                     <input class="form-control" type="hidden" name="id"><br>
                     <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="page" value="<?php echo$page?>">
+                    <input type="hidden" name="applicant" value="<?php echo$posting_id?>">
                     <center><label class="h1">Are you sure want to delete?</label></center>
                 </div>
 
@@ -350,5 +391,43 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function approved(id){
+        var form=document.approve;
+
+        form.id.value=id;
+    }
+</script>
+<div class="modal fade" tabindex="-1" id="kt_modal_4">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"></h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <form method="GET" name="approve" action="?page=<?php echo$page?>&applicant=<?php echo$posting_id?>">
+                <div class="modal-body">
+                    <input class="form-control" type="hidden" name="id"><br>
+                    <input type="hidden" name="action" value="approved">
+                    <input type="hidden" name="page" value="<?php echo$page?>">
+                    <input type="hidden" name="applicant" value="<?php echo$posting_id?>">
+                    <center><label class="h1">Are you sure want to approved?</label></center>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" name="approveded">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 

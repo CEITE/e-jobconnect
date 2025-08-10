@@ -205,12 +205,15 @@
             <th>Company</th>
             <th>Date Created</th>
             <th>Skill requirements</th>
+            <th>Application Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
             $sql = "SELECT t.*,
+            (SELECT status FROM application WHERE posting_id=t.id AND applicant_id='$user_id') AS application_status,
+            (SELECT COUNT(id) FROM application WHERE posting_id=t.id AND applicant_id='$user_id') AS applications,
             (SELECT firstname FROM employer WHERE id=t.employer_id) AS firstname,
             (SELECT lastname FROM employer WHERE id=t.employer_id) AS lastname
              FROM $table t WHERE status='approved'";
@@ -229,16 +232,33 @@
                     $colors="danger";
                 }
 
+                if($application_status=="pending"){
+                    $colors="warning";
+                }else if($application_status=="approved"){
+                    $colors="success";
+                }else{
+                    $colors="danger";
+                }
+
                 ?>
                 <tr>
                     <td><?php echo$firstname?> <?php echo$lastname?></td>
                     <td><?php echo$title?></td>
                     <td><?php echo$date_created?></td> 
                     <td><input class="form-control disable" disabled="" value="<?php echo$tagify?>" tagifies=''> </td>
+                    <td><span class="badge badge-light-<?php echo$colors?>"><?php echo$application_status?></td> 
                     <td>
                         <input type="hidden" id="description_<?php echo$id?>" value='<?php echo$description?>'>
                         <a class="btn btn-light-primary btn-sm" href="?page=application&applicant=<?php echo$id?>" ><i class="bi bi-people"></i> Apply</a>
                         <a class="btn btn-light-info btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_2" onclick="form_data('<?php echo$id?>','<?php echo$title?>','<?php echo$tagify?>')" ><i class="bi bi-eye"></i> View</a>
+
+                        <?php
+                            if($applications>=1){
+                               ?>
+                                 <a class="btn btn-light-primary btn-sm" href="?page=inquiries&employer=<?php echo$employer_id?>" ><i class="bi bi-send"></i> Message</a>
+                               <?php
+                            }
+                        ?>
                     </td>
                 </tr>
                 
@@ -405,7 +425,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="save">Apply</button>
+                    <!-- <button type="submit" class="btn btn-primary" name="save">Apply</button> -->
                 </div>
            </form>
         </div>
