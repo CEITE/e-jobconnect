@@ -2,14 +2,14 @@
 session_start();
 include'connect/connect.php';
 
-    if(isset($_SESSION['id'])){
-        $type=$_SESSION['type'];
+    // if(isset($_SESSION['id'])){
+    //     $type=$_SESSION['type'];
         
 
-        if($type!=="applicant"){
-            header("location: ../".$type."/");
-        }
-    }
+    //     if($type!=="applicant"){
+    //         header("location: ../".$type."/");
+    //     }
+    // }
 ?>
 <!DOCTYPE html>
 <html  >
@@ -64,7 +64,7 @@ include'connect/connect.php';
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="./">POST A JOB</a> <a class="btn btn-primary display-7" href="find_a_job.php">FIND JOB</a> <a class="btn btn-success-outline display-7" href="login.php">Login | Signup</a></div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-7" href="./employer/?page=posting">POST A JOB</a> <a class="btn btn-primary display-7" href="find_a_job.php">FIND JOB</a> <a class="btn btn-success-outline display-7" href="login.php">Login | Signup</a></div>
             </div>
         </div>
     </nav>
