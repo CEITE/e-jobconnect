@@ -50,6 +50,16 @@
 			</div>
 			<!--end:Menu sub-->
 		</div>
+		<a class="menu-link" href="?page=inquiries">
+			<span class="menu-icon">
+				<i class="ki-duotone ki-user fs-2">
+					<span class="path1"></span>
+					<span class="path2"></span>
+					<span class="path3"></span>
+				</i>
+			</span>
+			<span class="menu-item">Inquiried</span>
+		</a>
 		<a class="menu-link" href="?page=setting">
 			<span class="menu-icon">
 				<i class="ki-duotone ki-security-user fs-2">
