@@ -41,7 +41,29 @@ $ids=$_GET['applicant'];
 			<input class="form-control" name="tagify" value="<?php echo$tagify?>"   id="kt_tagify_1" style="border: none !important;">
 		</div>
 		<div class="card-footer">
-			
+			<!--begin::Form-->
+			<form class="form" action="#" method="post">
+			    <!--begin::Input group-->
+			    <div class="fv-row">
+			        <!--begin::Dropzone-->
+			        <div class="dropzone" id="kt_dropzonejs_example_1">
+			            <!--begin::Message-->
+			            <div class="dz-message needsclick">
+			                <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+
+			                <!--begin::Info-->
+			                <div class="ms-4">
+			                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here or click to upload your CV here.</h3>
+			                    <span class="fs-7 fw-semibold text-gray-500">Upload  1 file</span>
+			                </div>
+			                <!--end::Info-->
+			            </div>
+			        </div>
+			        <!--end::Dropzone-->
+			    </div>
+			    <!--end::Input group-->
+			</form>
+			<!--end::Form-->
 			
 		</div>
 	</div>
@@ -54,6 +76,21 @@ $ids=$_GET['applicant'];
 
         var input1 = document.querySelector("#kt_tagify_1");
         new Tagify(input1);
+
+        var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
+		    url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
+		    paramName: "file", // The name that will be used to transfer the file
+		    maxFiles: 10,
+		    maxFilesize: 10, // MB
+		    addRemoveLinks: true,
+		    accept: function(file, done) {
+		        if (file.name == "wow.jpg") {
+		            done("Naha, you don't.");
+		        } else {
+		            done();
+		        }
+		    }
+		});
          
     }, 1000);
 </script>
